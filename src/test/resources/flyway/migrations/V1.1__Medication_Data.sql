@@ -6,14 +6,55 @@ INSERT INTO adverse_reactions (severity, reaction) VALUES('mild', 'gastroesophag
 --Moderate
 INSERT INTO adverse_reactions (severity, reaction) VALUES('moderate', 'dysphagia');
 INSERT INTO adverse_reactions (severity, reaction) VALUES('moderate', 'esophagitis');
+INSERT INTO adverse_reactions (severity, reaction) VALUES('moderate', 'oral ulceration');
+INSERT INTO adverse_reactions (severity, reaction) VALUES('moderate', 'glossitis');
+INSERT INTO adverse_reactions (severity, reaction) VALUES('moderate', 'pneumonitis');
 
 --Severe
 INSERT INTO adverse_reactions (severity, reaction) VALUES('severe', 'bronchospasm');
 INSERT INTO adverse_reactions (severity, reaction) VALUES('severe', 'tardive dyskinesia');
 INSERT INTO adverse_reactions (severity, reaction) VALUES('severe', 'laryngospasm');
+INSERT INTO adverse_reactions (severity, reaction) VALUES('severe', 'laryngeal edema');
+INSERT INTO adverse_reactions (severity, reaction) VALUES('severe', 'esophageal ulceration');
+INSERT INTO adverse_reactions (severity, reaction) VALUES('severe', 'esophageal stricture');
+INSERT INTO adverse_reactions (severity, reaction) VALUES('severe', 'esophageal stricture');
 
 --AR Meds
-INSERT INTO ar_meds (reaction_id, med_id) VALUES();
+INSERT INTO ar_meds (reaction_fk, med_fk) VALUES((SELECT reaction_pk FROM adverse_reactions WHERE reaction = 'bronchospasm'), (SELECT med_fk FROM medications WHERE brand_name = 'Haldol'));
+INSERT INTO ar_meds (reaction_fk, med_fk) VALUES((SELECT reaction_pk FROM adverse_reactions WHERE reaction = 'bronchospasm'), (SELECT med_fk FROM medications WHERE brand_name = 'Gablofen'));
+INSERT INTO ar_meds (reaction_fk, med_fk) VALUES((SELECT reaction_pk FROM adverse_reactions WHERE reaction = 'bronchospasm'), (SELECT med_fk FROM medications WHERE brand_name = 'Ditropan XL'));
+INSERT INTO ar_meds (reaction_fk, med_fk) VALUES((SELECT reaction_pk FROM adverse_reactions WHERE reaction = 'bronchospasm'), (SELECT med_fk FROM medications WHERE brand_name = 'Celexa'));
+INSERT INTO ar_meds (reaction_fk, med_fk) VALUES((SELECT reaction_pk FROM adverse_reactions WHERE reaction = 'dysgeusia'), (SELECT med_fk FROM medications WHERE brand_name = 'Pylera'));
+INSERT INTO ar_meds (reaction_fk, med_fk) VALUES((SELECT reaction_pk FROM adverse_reactions WHERE reaction = 'dysgeusia'), (SELECT med_fk FROM medications WHERE brand_name = 'Fosamax'));
+INSERT INTO ar_meds (reaction_fk, med_fk) VALUES((SELECT reaction_pk FROM adverse_reactions WHERE reaction = 'dysgeusia'), (SELECT med_fk FROM medications WHERE brand_name = 'Ditropan XL'));
+INSERT INTO ar_meds (reaction_fk, med_fk) VALUES((SELECT reaction_pk FROM adverse_reactions WHERE reaction = 'dysgeusia'), (SELECT med_fk FROM medications WHERE brand_name = 'Celexa'));
+INSERT INTO ar_meds (reaction_fk, med_fk) VALUES((SELECT reaction_pk FROM adverse_reactions WHERE reaction = 'dysgeusia'), (SELECT med_fk FROM medications WHERE brand_name = 'Protonix'));
+INSERT INTO ar_meds (reaction_fk, med_fk) VALUES((SELECT reaction_pk FROM adverse_reactions WHERE reaction = 'dysphagia'), (SELECT med_fk FROM medications WHERE brand_name = 'Haldol'));
+INSERT INTO ar_meds (reaction_fk, med_fk) VALUES((SELECT reaction_pk FROM adverse_reactions WHERE reaction = 'dysphagia'), (SELECT med_fk FROM medications WHERE brand_name = 'Pylera'));
+INSERT INTO ar_meds (reaction_fk, med_fk) VALUES((SELECT reaction_pk FROM adverse_reactions WHERE reaction = 'dysphagia'), (SELECT med_fk FROM medications WHERE brand_name = 'Fosamax'));
+INSERT INTO ar_meds (reaction_fk, med_fk) VALUES((SELECT reaction_pk FROM adverse_reactions WHERE reaction = 'dysphagia'), (SELECT med_fk FROM medications WHERE brand_name = 'Ditropan XL'));
+INSERT INTO ar_meds (reaction_fk, med_fk) VALUES((SELECT reaction_pk FROM adverse_reactions WHERE reaction = 'esophageal stricture'), (SELECT med_fk FROM medications WHERE brand_name = 'Fosamax'));
+INSERT INTO ar_meds (reaction_fk, med_fk) VALUES((SELECT reaction_pk FROM adverse_reactions WHERE reaction = 'esophageal ulceration'), (SELECT med_fk FROM medications WHERE brand_name = 'Pylera'));
+INSERT INTO ar_meds (reaction_fk, med_fk) VALUES((SELECT reaction_pk FROM adverse_reactions WHERE reaction = 'esophageal ulceration'), (SELECT med_fk FROM medications WHERE brand_name = 'Fosamax'));
+INSERT INTO ar_meds (reaction_fk, med_fk) VALUES((SELECT reaction_pk FROM adverse_reactions WHERE reaction = 'esophagitis'), (SELECT med_fk FROM medications WHERE brand_name = 'Pylera'));
+INSERT INTO ar_meds (reaction_fk, med_fk) VALUES((SELECT reaction_pk FROM adverse_reactions WHERE reaction = 'esophagitis'), (SELECT med_fk FROM medications WHERE brand_name = 'Fosamax'));
+INSERT INTO ar_meds (reaction_fk, med_fk) VALUES((SELECT reaction_pk FROM adverse_reactions WHERE reaction = 'esophagitis'), (SELECT med_fk FROM medications WHERE brand_name = 'Celexa'));
+INSERT INTO ar_meds (reaction_fk, med_fk) VALUES((SELECT reaction_pk FROM adverse_reactions WHERE reaction = 'gastroesophageal reflux'), (SELECT med_fk FROM medications WHERE brand_name = 'Fosamax'));
+INSERT INTO ar_meds (reaction_fk, med_fk) VALUES((SELECT reaction_pk FROM adverse_reactions WHERE reaction = 'gastroesophageal reflux'), (SELECT med_fk FROM medications WHERE brand_name = 'Ditropan XL'));
+INSERT INTO ar_meds (reaction_fk, med_fk) VALUES((SELECT reaction_pk FROM adverse_reactions WHERE reaction = 'gastroesophageal reflux'), (SELECT med_fk FROM medications WHERE brand_name = 'Celexa'));
+INSERT INTO ar_meds (reaction_fk, med_fk) VALUES((SELECT reaction_pk FROM adverse_reactions WHERE reaction = 'glossitis'), (SELECT med_fk FROM medications WHERE brand_name = 'Pylera'));
+INSERT INTO ar_meds (reaction_fk, med_fk) VALUES((SELECT reaction_pk FROM adverse_reactions WHERE reaction = 'glossitis'), (SELECT med_fk FROM medications WHERE brand_name = 'Celexa'));
+INSERT INTO ar_meds (reaction_fk, med_fk) VALUES((SELECT reaction_pk FROM adverse_reactions WHERE reaction = 'laryngeal edema'), (SELECT med_fk FROM medications WHERE brand_name = 'Haldol'));
+INSERT INTO ar_meds (reaction_fk, med_fk) VALUES((SELECT reaction_pk FROM adverse_reactions WHERE reaction = 'laryngospasm'), (SELECT med_fk FROM medications WHERE brand_name = 'Haldol'));
+INSERT INTO ar_meds (reaction_fk, med_fk) VALUES((SELECT reaction_pk FROM adverse_reactions WHERE reaction = 'pneumonitis'), (SELECT med_fk FROM medications WHERE brand_name = 'Celexa'));
+INSERT INTO ar_meds (reaction_fk, med_fk) VALUES((SELECT reaction_pk FROM adverse_reactions WHERE reaction = 'tardive dyskinesia'), (SELECT med_fk FROM medications WHERE brand_name = 'Haldol'));
+INSERT INTO ar_meds (reaction_fk, med_fk) VALUES((SELECT reaction_pk FROM adverse_reactions WHERE reaction = 'xerostomia'), (SELECT med_fk FROM medications WHERE brand_name = 'Haldol'));
+INSERT INTO ar_meds (reaction_fk, med_fk) VALUES((SELECT reaction_pk FROM adverse_reactions WHERE reaction = 'xerostomia'), (SELECT med_fk FROM medications WHERE brand_name = 'Pylera'));
+INSERT INTO ar_meds (reaction_fk, med_fk) VALUES((SELECT reaction_pk FROM adverse_reactions WHERE reaction = 'xerostomia'), (SELECT med_fk FROM medications WHERE brand_name = 'Neurontin'));
+INSERT INTO ar_meds (reaction_fk, med_fk) VALUES((SELECT reaction_pk FROM adverse_reactions WHERE reaction = 'xerostomia'), (SELECT med_fk FROM medications WHERE brand_name = 'Gablofen'));
+INSERT INTO ar_meds (reaction_fk, med_fk) VALUES((SELECT reaction_pk FROM adverse_reactions WHERE reaction = 'xerostomia'), (SELECT med_fk FROM medications WHERE brand_name = 'Ditropan'));
+INSERT INTO ar_meds (reaction_fk, med_fk) VALUES((SELECT reaction_pk FROM adverse_reactions WHERE reaction = 'xerostomia'), (SELECT med_fk FROM medications WHERE brand_name = 'Celexa'));
+INSERT INTO ar_meds (reaction_fk, med_fk) VALUES((SELECT reaction_pk FROM adverse_reactions WHERE reaction = 'xerostomia'), (SELECT med_fk FROM medications WHERE brand_name = 'Protonix'));
 
 --Generics
 INSERT INTO generics (generic_name) VALUES('haloperidol');
@@ -46,4 +87,4 @@ INSERT INTO users (pseudo_name, age, date_of_eval, date_of_discharge, med_dx_icd
 INSERT INTO users (pseudo_name, age, date_of_eval, date_of_discharge, med_dx_icd, tx_dx_icd) VALUES('Roger@', 39, '07/07/21', '08/08/21', 'K20.0', 'R13.14');
 
 --User Meds
-INSERT INTO user_meds (med_id, user_id);
+INSERT INTO user_meds (med_fk, user_fk);

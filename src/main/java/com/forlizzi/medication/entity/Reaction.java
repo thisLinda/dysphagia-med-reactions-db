@@ -10,4 +10,7 @@ public class Reaction {
     private ReactionSeverity severity;
     private String reaction;
 
+    public String getReactionPK() {
+        return reactionPK;
+    }
 }
