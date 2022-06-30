@@ -1,7 +1,7 @@
 package com.forlizzi.medication.controller;
 
 import com.forlizzi.medication.entity.Reaction;
-import com.forlizzi.medication.entity.Severity;
+import com.forlizzi.medication.entity.ReactionSeverity;
 import io.swagger.v3.oas.annotations.OpenAPIDefinition;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.Parameter;
@@ -66,7 +66,7 @@ public interface ReactionController {
     @ResponseStatus(code = HttpStatus.OK)
     List<Reaction> fetchReaction(
             @RequestParam(required = false)
-                    Severity severity,
+                    ReactionSeverity severity,
             @RequestParam(required = false)
                     String reaction);
     //    @formatter:on

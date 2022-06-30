@@ -1,7 +1,7 @@
 package com.forlizzi.medication.dao;
 
 import com.forlizzi.medication.entity.Reaction;
-import com.forlizzi.medication.entity.Severity;
+import com.forlizzi.medication.entity.ReactionSeverity;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.jdbc.core.RowMapper;
@@ -22,7 +22,7 @@ public class DefaultReactionDao implements ReactionDao {
     private NamedParameterJdbcTemplate jdbcTemplate;
 
     @Override
-    public List<Reaction> fetchReaction(Severity severity, String reaction) {
+    public List<Reaction> fetchReaction(ReactionSeverity severity, String reaction) {
         log.debug("DAO: severity={}, reaction={}", severity, reaction);
 
         // @formatter:off
@@ -41,18 +41,12 @@ public class DefaultReactionDao implements ReactionDao {
             public Reaction mapRow(ResultSet rs, int rowNum) throws SQLException {
                 // @formatter:off
                 return Reaction.builder()
-                        .basePrice(new BigDecimal(rs.getString("base_price")))
-                        .modelId(JeepModel.valueOf(rs.getString("model_id")))
-                        .modelPK(rs.getLong("model_pk"))
-                        .numDoors(rs.getInt("num_doors"))
-                        .trimLevel(rs.getString("trim_level"))
-                        .wheelSize(rs.getInt("wheel_size"))
+                        .severity(ReactionSeverity.valueOf(rs.getString("severity")))
+                        .reaction(rs.getString("reaction"))
                         .build();
                 // @formatter:on
             }
         });
-
-        return null;
     }
 
 }

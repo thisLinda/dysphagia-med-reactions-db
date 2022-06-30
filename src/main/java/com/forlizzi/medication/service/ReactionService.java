@@ -1,7 +1,7 @@
 package com.forlizzi.medication.service;
 
 import com.forlizzi.medication.entity.Reaction;
-import com.forlizzi.medication.entity.Severity;
+import com.forlizzi.medication.entity.ReactionSeverity;
 
 import java.util.List;
 
@@ -12,5 +12,5 @@ public interface ReactionService {
      * @param reaction
      * @return
      */
-    List<Reaction> fetchReaction(Severity severity, String reaction);
+    List<Reaction> fetchReaction(ReactionSeverity severity, String reaction);
 }

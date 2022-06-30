@@ -2,7 +2,7 @@ package com.forlizzi.medication.service;
 
 import com.forlizzi.medication.dao.ReactionDao;
 import com.forlizzi.medication.entity.Reaction;
-import com.forlizzi.medication.entity.Severity;
+import com.forlizzi.medication.entity.ReactionSeverity;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -17,7 +17,7 @@ public class DefaultReactionService implements ReactionService {
     private ReactionDao reactionDao;
 
     @Override
-    public List<Reaction> fetchReaction(Severity severity, String reaction) {
+    public List<Reaction> fetchReaction(ReactionSeverity severity, String reaction) {
         log.info("The fetchReaction method was called with severity={} and reaction={}", severity, reaction);
 
         return reactionDao.fetchReaction(severity, reaction);

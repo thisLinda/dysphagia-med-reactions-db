@@ -7,8 +7,7 @@ import lombok.*;
 @NoArgsConstructor
 @AllArgsConstructor
 public class Reaction {
-    private int reactionId;
-    private String severity;
+    private ReactionSeverity severity;
     private String reaction;
 
 }

@@ -1,7 +1,7 @@
 package com.forlizzi.medication.controller;
 
 import com.forlizzi.medication.entity.Reaction;
-import com.forlizzi.medication.entity.Severity;
+import com.forlizzi.medication.entity.ReactionSeverity;
 import com.forlizzi.medication.service.ReactionService;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -17,7 +17,7 @@ public class DefaultReactionController implements ReactionController {
     private ReactionService reactionService;
 
     @Override
-    public List<Reaction> fetchReaction(Severity severity, String reaction) {
+    public List<Reaction> fetchReaction(ReactionSeverity severity, String reaction) {
 //        log.info("severity={}, reaction={}", severity, reaction);
         log.debug("severity={}, reaction={}", severity, reaction);
         return reactionService.fetchReaction(severity, reaction);

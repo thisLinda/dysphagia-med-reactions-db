@@ -1,6 +1,7 @@
 package support;
 
 import com.forlizzi.medication.entity.Reaction;
+import com.forlizzi.medication.entity.ReactionSeverity;
 
 import java.util.LinkedList;
 import java.util.List;
@@ -11,13 +12,11 @@ public class FetchReactionTestSupport extends BaseTest {
 
 //        @formatter:off
         list.add(Reaction.builder()
-                .reactionId(400)
-                .severity("mild")
+                .severity(ReactionSeverity.MILD)
                 .reaction("xerostomia")
                 .build());
         list.add(Reaction.builder()
-                .reactionId(406)
-                .severity("severe")
+                .severity(ReactionSeverity.SEVERE)
                 .reaction("tardive dyskinesia")
                 .build());
 //        @formatter:on
@@ -26,8 +25,3 @@ public class FetchReactionTestSupport extends BaseTest {
     }
 
 }
-
-/*
-INSERT INTO adverse_reactions (reaction_id, severity, reaction) VALUES(400, 'severe', 'tardive dyskinesia');
-INSERT INTO adverse_reactions (reaction_id, severity, reaction) VALUES(400, 'severe', 'laryngospasm');
- */

@@ -1,7 +1,7 @@
 package reaction.controller;
 
 import com.forlizzi.medication.MedDb;
-import com.forlizzi.medication.entity.Severity;
+import com.forlizzi.medication.entity.ReactionSeverity;
 import com.forlizzi.medication.entity.Reaction;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -37,7 +37,7 @@ class FetchReactionTest extends FetchReactionTestSupport {
     @Test
     void testThatAValidReactionsIsReturnedWhenAValidSeverityIsSupplied() {
 //        Given: a valid severity and reaction
-        Severity severity = Severity.SEVERE;
+        ReactionSeverity severity = ReactionSeverity.SEVERE;
         String reaction = "Laryngospasm";
         String uri = String.format(
                 "http://localhost:%d/reactions?severity=%s&reaction=%s", serverPort, severity, reaction);
@@ -50,7 +50,9 @@ class FetchReactionTest extends FetchReactionTestSupport {
         assertThat(response.getStatusCode()).isEqualTo(HttpStatus.OK);
 
 //        And: the actual list returned is the same as the expected list
+//        List<Reaction> actual = response.getBody();
         List<Reaction> expected = buildExpected();
+
         assertThat(response.getBody()).isEqualTo(expected);
     }
 
