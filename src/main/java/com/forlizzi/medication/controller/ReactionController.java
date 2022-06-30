@@ -1,6 +1,7 @@
 package com.forlizzi.medication.controller;
 
 import com.forlizzi.medication.entity.Reaction;
+import com.forlizzi.medication.entity.Severity;
 import io.swagger.v3.oas.annotations.OpenAPIDefinition;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.Parameter;
@@ -20,7 +21,7 @@ import java.util.List;
 @RequestMapping("/reactions")
 @OpenAPIDefinition(info = @Info(title = "Medication Reaction Service"), servers = {
         @Server(url = "http://localhost:8080", description = "Local server.")})
-public interface MedReactionController {
+public interface ReactionController {
 //    @formatter:off
     @Operation(
             summary = "Returns a list of medication adverse reactions",
@@ -52,12 +53,12 @@ public interface MedReactionController {
                     @Parameter(
                             name = "severity",
                             allowEmptyValue = false,
-                            required = true,
+                            required = false,
                             description = "The severity as JSON"),
                     @Parameter(
                             name = "reaction",
                             allowEmptyValue = false,
-                            required = true,
+                            required = false,
                             description = "The reaction as JSON")
             }
     )
@@ -65,7 +66,7 @@ public interface MedReactionController {
     @ResponseStatus(code = HttpStatus.OK)
     List<Reaction> fetchReaction(
             @RequestParam(required = false)
-                    String severity,
+                    Severity severity,
             @RequestParam(required = false)
                     String reaction);
     //    @formatter:on

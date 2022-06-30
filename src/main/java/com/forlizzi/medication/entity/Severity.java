@@ -1,5 +1,5 @@
 package com.forlizzi.medication.entity;
 
-public enum AdverseReaction {
+public enum Severity {
     SEVERE, MODERATE, MILD;
 }
