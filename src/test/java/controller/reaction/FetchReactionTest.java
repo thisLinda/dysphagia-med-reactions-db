@@ -14,8 +14,6 @@ import org.junit.jupiter.params.provider.MethodSource;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.boot.test.mock.mockito.MockBean;
-import org.springframework.boot.test.web.client.TestRestTemplate;
-import org.springframework.boot.test.web.server.LocalServerPort;
 import org.springframework.core.ParameterizedTypeReference;
 import org.springframework.http.HttpMethod;
 import org.springframework.http.HttpStatus;
@@ -24,7 +22,6 @@ import org.springframework.test.context.ActiveProfiles;
 import org.springframework.test.context.jdbc.Sql;
 import org.springframework.test.context.jdbc.SqlConfig;
 import support.FetchReactionTestSupport;
-
 import java.util.List;
 import java.util.Map;
 import java.util.stream.Stream;
@@ -44,7 +41,7 @@ class FetchReactionTest extends FetchReactionTestSupport {
     class TestsThatDoNotPolluteTheApplicationContext extends FetchReactionTestSupport {
 
         @Test
-        void testThatAValidReactionsIsReturnedWhenAValidSeverityIsSupplied() {
+        void testThatAValidReactionIsReturnedWhenAValidSeverityIsSupplied() {
 //        Given: a valid severity and reaction
             ReactionSeverity severity = ReactionSeverity.SEVERE;
             String reaction = "Laryngospasm";
@@ -53,7 +50,8 @@ class FetchReactionTest extends FetchReactionTestSupport {
 
 //        When: a connection is made to the URI
             ResponseEntity<List<Reaction>> response = getRestTemplate().exchange(
-                    uri, HttpMethod.GET, null, new ParameterizedTypeReference<>() {});
+                    uri, HttpMethod.GET, null, new ParameterizedTypeReference<>() {
+                    });
 
 //        Then: a success (OK -200) status code is returned
             assertThat(response.getStatusCode()).isEqualTo(HttpStatus.OK);
@@ -62,7 +60,8 @@ class FetchReactionTest extends FetchReactionTestSupport {
             List<Reaction> actual = response.getBody();
             List<Reaction> expected = buildExpected();
 
-            assertThat(response.getBody()).isEqualTo(expected);
+//            assertThat(response.getBody()).isEqualTo(expected);
+            assertThat(actual).isEqualTo(expected);
         }
 
         @Test
@@ -87,7 +86,7 @@ class FetchReactionTest extends FetchReactionTestSupport {
         }
 
         @ParameterizedTest
-        @MethodSource("package reaction.controller.FetchReactionTest#parametersForInvalidInput")
+        @MethodSource("package controller.reaction.FetchReactionTest#parametersForInvalidInput")
         void testThatAnErrorMessageIsReturnedWhenAnInvalidValueIsSupplied(String severity, String reaction, String reason) {
 //        Given: a valid severity and reaction
             String uri = String.format("%s?severity=%s&reaction=%s",
@@ -95,7 +94,8 @@ class FetchReactionTest extends FetchReactionTestSupport {
 
 //        When: a connection is made to the URI
             ResponseEntity<Map<String, Object>> response = getRestTemplate().exchange(
-                    uri, HttpMethod.GET, null, new ParameterizedTypeReference<>() {});
+                    uri, HttpMethod.GET, null, new ParameterizedTypeReference<>() {
+                    });
 
 //        Then: a not found (404) status code is returned
             assertThat(response.getStatusCode()).isEqualTo(HttpStatus.BAD_REQUEST);

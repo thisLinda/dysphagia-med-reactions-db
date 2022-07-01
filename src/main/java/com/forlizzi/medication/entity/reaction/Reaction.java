@@ -2,6 +2,7 @@
 
 package com.forlizzi.medication.entity.reaction;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.*;
 
 import java.util.Comparator;
@@ -11,6 +12,7 @@ import java.util.Comparator;
 @NoArgsConstructor
 @AllArgsConstructor
 public class Reaction implements Comparable<Reaction> {
+    private Long reactionPK;
     private ReactionSeverity severity;
     private String reaction;
 
@@ -24,8 +26,8 @@ public class Reaction implements Comparable<Reaction> {
         // @formatter:on
     }
 
-//    @JsonIgnore
-//    public String getReactionPK() {
-//        return reactionPK;
-//    }
+    @JsonIgnore
+    public Long getReactionPK() {
+        return reactionPK;
+    }
 }

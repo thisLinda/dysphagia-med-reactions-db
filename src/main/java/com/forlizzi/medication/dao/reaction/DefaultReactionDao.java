@@ -7,7 +7,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.jdbc.core.RowMapper;
 import org.springframework.jdbc.core.namedparam.NamedParameterJdbcTemplate;
 import org.springframework.stereotype.Component;
-
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.HashMap;
@@ -36,7 +35,7 @@ public class DefaultReactionDao implements ReactionDao {
         params.put("severity", severity.toString());
         params.put("reaction", reaction);
 
-        return jdbcTemplate.query(sql, params, new RowMapper<>() {
+        return jdbcTemplate.query(sql, params, new RowMapper<Reaction>() {
             @Override
             public Reaction mapRow(ResultSet rs, int rowNum) throws SQLException {
                 // @formatter:off
