@@ -1,8 +1,8 @@
-package com.forlizzi.medication.service;
+package com.forlizzi.medication.service.reaction;
 
-import com.forlizzi.medication.dao.ReactionDao;
-import com.forlizzi.medication.entity.Reaction;
-import com.forlizzi.medication.entity.ReactionSeverity;
+import com.forlizzi.medication.dao.reaction.ReactionDao;
+import com.forlizzi.medication.entity.reaction.Reaction;
+import com.forlizzi.medication.entity.reaction.ReactionSeverity;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;

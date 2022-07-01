@@ -1,10 +1,10 @@
-package reaction.controller;
+package controller.reaction;
 
 import com.forlizzi.medication.Constants;
 import com.forlizzi.medication.MedDb;
-import com.forlizzi.medication.entity.ReactionSeverity;
-import com.forlizzi.medication.entity.Reaction;
-import com.forlizzi.medication.service.ReactionService;
+import com.forlizzi.medication.entity.reaction.ReactionSeverity;
+import com.forlizzi.medication.entity.reaction.Reaction;
+import com.forlizzi.medication.service.reaction.ReactionService;
 import org.junit.jupiter.api.Nested;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;

@@ -1,8 +1,8 @@
-package com.forlizzi.medication.controller;
+package com.forlizzi.medication.controller.reaction;
 
 import com.forlizzi.medication.Constants;
-import com.forlizzi.medication.entity.Reaction;
-import com.forlizzi.medication.entity.ReactionSeverity;
+import com.forlizzi.medication.entity.reaction.Reaction;
+import com.forlizzi.medication.entity.reaction.ReactionSeverity;
 import io.swagger.v3.oas.annotations.OpenAPIDefinition;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.Parameter;

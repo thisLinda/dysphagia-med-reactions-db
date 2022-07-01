@@ -1,8 +1,8 @@
-package com.forlizzi.medication.controller;
+package com.forlizzi.medication.controller.reaction;
 
-import com.forlizzi.medication.entity.Reaction;
-import com.forlizzi.medication.entity.ReactionSeverity;
-import com.forlizzi.medication.service.ReactionService;
+import com.forlizzi.medication.entity.reaction.Reaction;
+import com.forlizzi.medication.entity.reaction.ReactionSeverity;
+import com.forlizzi.medication.service.reaction.ReactionService;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.RestController;

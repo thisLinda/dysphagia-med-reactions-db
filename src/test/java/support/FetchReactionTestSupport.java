@@ -1,7 +1,7 @@
 package support;
 
-import com.forlizzi.medication.entity.Reaction;
-import com.forlizzi.medication.entity.ReactionSeverity;
+import com.forlizzi.medication.entity.reaction.Reaction;
+import com.forlizzi.medication.entity.reaction.ReactionSeverity;
 import org.springframework.http.HttpStatus;
 
 import java.util.Collections;

@@ -1,7 +1,7 @@
-package com.forlizzi.medication.service;
+package com.forlizzi.medication.service.reaction;
 
-import com.forlizzi.medication.entity.Reaction;
-import com.forlizzi.medication.entity.ReactionSeverity;
+import com.forlizzi.medication.entity.reaction.Reaction;
+import com.forlizzi.medication.entity.reaction.ReactionSeverity;
 
 import java.util.List;
 

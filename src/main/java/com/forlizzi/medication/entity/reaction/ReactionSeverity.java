@@ -1,4 +1,4 @@
-package com.forlizzi.medication.entity;
+package com.forlizzi.medication.entity.reaction;
 
 public enum ReactionSeverity {
     SEVERE, MODERATE, MILD, toString;

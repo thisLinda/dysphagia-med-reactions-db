@@ -13,8 +13,8 @@ public class BaseTest {
     @Getter
     private TestRestTemplate restTemplate;
 
-    protected String getBaseUriForUsers() {
-        return String.format("http://localhost:%d/users", serverPort);
+    protected String getBaseUriForUserMedList() {
+        return String.format("http://localhost:%d/usermedlist", serverPort);
     }
 
     protected String getBaseUriForReactions() {
