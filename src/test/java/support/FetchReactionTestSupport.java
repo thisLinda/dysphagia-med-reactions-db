@@ -13,7 +13,7 @@ import static org.assertj.core.api.Assertions.assertThat;
 
 public class FetchReactionTestSupport extends BaseTest {
     protected List<Reaction> buildExpected() {
-        List<Reaction> list = new LinkedList<Reaction>();
+        List<Reaction> list = new LinkedList<>();
 
 //        @formatter:off
         list.add(Reaction.builder()

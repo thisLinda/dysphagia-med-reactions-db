@@ -32,11 +32,7 @@ import java.util.stream.Stream;
 import static org.assertj.core.api.AssertionsForClassTypes.assertThat;
 import static org.mockito.Mockito.doThrow;
 
-class FetchReactionTest {
-    @Autowired
-    private TestRestTemplate restTemplate;
-    @LocalServerPort
-    private int serverPort;
+class FetchReactionTest extends FetchReactionTestSupport {
 
     @Nested
     @SpringBootTest(webEnvironment = SpringBootTest.WebEnvironment.RANDOM_PORT, classes={MedDb.class})
@@ -52,11 +48,11 @@ class FetchReactionTest {
 //        Given: a valid severity and reaction
             ReactionSeverity severity = ReactionSeverity.SEVERE;
             String reaction = "Laryngospasm";
-            String uri = String.format(
-                    "http://localhost:%d/reactions?severity=%s&reaction=%s", serverPort, severity, reaction);
+            String uri = String.format("%s?severity=%s&reaction=%s",
+                    getBaseUriForReactions(), severity, reaction);
 
 //        When: a connection is made to the URI
-            ResponseEntity<List<Reaction>> response = restTemplate.exchange(
+            ResponseEntity<List<Reaction>> response = getRestTemplate().exchange(
                     uri, HttpMethod.GET, null, new ParameterizedTypeReference<>() {});
 
 //        Then: a success (OK -200) status code is returned
@@ -74,11 +70,11 @@ class FetchReactionTest {
 //        Given: a valid severity and reaction
             ReactionSeverity severity = ReactionSeverity.SEVERE;
             String reaction = "Invalid Reaction";
-            String uri = String.format(
-                    "http://localhost:%d/reactions?severity=%s&reaction=%s", serverPort, severity, reaction);
+            String uri = String.format("%s?severity=%s&reaction=%s",
+                    getBaseUriForReactions(), severity, reaction);
 
 //        When: a connection is made to the URI
-            ResponseEntity<Map<String, Object>> response = restTemplate.exchange(
+            ResponseEntity<Map<String, Object>> response = getRestTemplate().exchange(
                     uri, HttpMethod.GET, null, new ParameterizedTypeReference<>() {});
 
 //        Then: a not found (404) status code is returned
@@ -94,11 +90,11 @@ class FetchReactionTest {
         @MethodSource("package reaction.controller.FetchReactionTest#parametersForInvalidInput")
         void testThatAnErrorMessageIsReturnedWhenAnInvalidValueIsSupplied(String severity, String reaction, String reason) {
 //        Given: a valid severity and reaction
-            String uri = String.format(
-                    "http://localhost:%d/reactions?severity=%s&reaction=%s", serverPort, severity, reaction);
+            String uri = String.format("%s?severity=%s&reaction=%s",
+                    getBaseUriForReactions(), severity, reaction);
 
 //        When: a connection is made to the URI
-            ResponseEntity<Map<String, Object>> response = restTemplate.exchange(
+            ResponseEntity<Map<String, Object>> response = getRestTemplate().exchange(
                     uri, HttpMethod.GET, null, new ParameterizedTypeReference<>() {});
 
 //        Then: a not found (404) status code is returned
@@ -138,13 +134,13 @@ class FetchReactionTest {
 //        Given: a valid severity and reaction
             ReactionSeverity severity = ReactionSeverity.SEVERE;
             String reaction = "Invalid";
-            String uri = String.format(
-                    "http://localhost:%d/reactions?severity=%s&reaction=%s", serverPort, severity, reaction);
+            String uri = String.format("%s?severity=%s&reaction=%s",
+                    getBaseUriForReactions(), severity, reaction);
 
             doThrow(new RuntimeException("Ouch!")).when(reactionService).fetchReactions(severity, reaction);
 
 //        When: a connection is made to the URI
-            ResponseEntity<Map<String, Object>> response = restTemplate.exchange(
+            ResponseEntity<Map<String, Object>> response = getRestTemplate().exchange(
                     uri, HttpMethod.GET, null, new ParameterizedTypeReference<>() {});
 
 //        Then: an internal server error is returned
