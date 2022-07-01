@@ -12,5 +12,5 @@ public interface ReactionService {
      * @param reaction
      * @return
      */
-    List<Reaction> fetchReaction(ReactionSeverity severity, String reaction);
+    List<Reaction> fetchReactions(ReactionSeverity severity, String reaction);
 }

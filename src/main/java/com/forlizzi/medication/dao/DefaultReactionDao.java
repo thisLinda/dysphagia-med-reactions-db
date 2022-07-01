@@ -22,7 +22,7 @@ public class DefaultReactionDao implements ReactionDao {
     private NamedParameterJdbcTemplate jdbcTemplate;
 
     @Override
-    public List<Reaction> fetchReaction(ReactionSeverity severity, String reaction) {
+    public List<Reaction> fetchReactions(ReactionSeverity severity, String reaction) {
         log.debug("DAO: severity={}, reaction={}", severity, reaction);
 
         // @formatter:off
