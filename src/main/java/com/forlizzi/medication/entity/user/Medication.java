@@ -1,15 +1,12 @@
 package com.forlizzi.medication.entity.user;
 
+import lombok.Builder;
 import lombok.Data;
 
 @Data
+@Builder
 public class Medication {
     private Long medPK;
     private String brandName;
     private boolean hasReaction;
 }
-
-//med_pk int NOT NULL AUTO_INCREMENT,
-//        brand_name varchar(40) NOT NULL,
-//        has_reaction boolean,
-//        PRIMARY KEY (med_pk)

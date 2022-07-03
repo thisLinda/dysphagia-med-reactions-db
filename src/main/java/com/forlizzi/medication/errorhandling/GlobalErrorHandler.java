@@ -58,7 +58,7 @@ public class GlobalErrorHandler {
         }
         error.put("message", e.toString());
         error.put("status code", status.value());
-        error.put("uri", webRequest.getContextPath());
+//        error.put("uri", webRequest.getContextPath());
         error.put("timestamp", timestamp);
         error.put("reason", status.getReasonPhrase());
 
@@ -70,4 +70,5 @@ public class GlobalErrorHandler {
 
         return error;
     }
+
 }
