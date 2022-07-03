@@ -1,5 +1,3 @@
-// ToDo: ? need to remove
-
 package com.forlizzi.medication.entity.reaction;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;

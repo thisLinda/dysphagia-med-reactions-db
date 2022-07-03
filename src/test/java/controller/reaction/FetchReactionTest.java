@@ -11,7 +11,6 @@ import org.junit.jupiter.params.ParameterizedTest;
 import static org.junit.jupiter.params.provider.Arguments.arguments;
 import org.junit.jupiter.params.provider.Arguments;
 import org.junit.jupiter.params.provider.MethodSource;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.boot.test.mock.mockito.MockBean;
 import org.springframework.core.ParameterizedTypeReference;
@@ -44,7 +43,7 @@ class FetchReactionTest extends FetchReactionTestSupport {
         void testThatAValidReactionIsReturnedWhenAValidSeverityIsSupplied() {
 //        Given: a valid severity and reaction
             ReactionSeverity severity = ReactionSeverity.SEVERE;
-            String reaction = "Laryngospasm";
+            String reaction = "laryngospasm";
             String uri = String.format("%s?severity=%s&reaction=%s",
                     getBaseUriForReactions(), severity, reaction);
 
@@ -57,8 +56,9 @@ class FetchReactionTest extends FetchReactionTestSupport {
             assertThat(response.getStatusCode()).isEqualTo(HttpStatus.OK);
 
 //        And: the actual list returned is the same as the expected list
-            List<Reaction> actual = response.getBody();
-            List<Reaction> expected = buildExpected();
+
+                List<Reaction> actual = response.getBody();
+                List<Reaction> expected = buildExpected();
 
 //            assertThat(response.getBody()).isEqualTo(expected);
             assertThat(actual).isEqualTo(expected);
@@ -86,7 +86,7 @@ class FetchReactionTest extends FetchReactionTestSupport {
         }
 
         @ParameterizedTest
-        @MethodSource("package controller.reaction.FetchReactionTest#parametersForInvalidInput")
+        @MethodSource("com.forlizzi.package controller.reaction.FetchReactionTest#parametersForInvalidInput")
         void testThatAnErrorMessageIsReturnedWhenAnInvalidValueIsSupplied(String severity, String reaction, String reason) {
 //        Given: a valid severity and reaction
             String uri = String.format("%s?severity=%s&reaction=%s",
