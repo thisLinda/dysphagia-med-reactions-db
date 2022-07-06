@@ -1,9 +1,19 @@
 package com.forlizzi.medication.entity.user;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import lombok.Builder;
 import lombok.Data;
 
 @Data
+@Builder
 public class UserMedList {
-    private String pseudoName;
-    private String brandName;
+    private Long userMedsListPK;
+    private User user;
+    private Medication medication;
+
+    @JsonIgnore
+    public Long getUserMedsListPK() {
+        return userMedsListPK;
+    }
+
 }

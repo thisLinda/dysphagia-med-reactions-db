@@ -13,4 +13,5 @@ public class User {
     private String dateOfDischarge;
     private String medDxIcd;
     private String txDxIcd;
+
 }

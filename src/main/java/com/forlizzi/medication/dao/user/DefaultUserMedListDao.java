@@ -8,6 +8,8 @@ import org.springframework.dao.DataAccessException;
 import org.springframework.jdbc.core.ResultSetExtractor;
 import org.springframework.jdbc.core.namedparam.MapSqlParameterSource;
 import org.springframework.jdbc.core.namedparam.NamedParameterJdbcTemplate;
+import org.springframework.jdbc.support.GeneratedKeyHolder;
+import org.springframework.jdbc.support.KeyHolder;
 import org.springframework.stereotype.Component;
 import java.sql.ResultSet;
 import java.sql.SQLException;
@@ -22,44 +24,68 @@ public class DefaultUserMedListDao implements UserMedListDao {
   private NamedParameterJdbcTemplate jdbcTemplate;
 
   @Override
-  public UserMedList saveUserMedList(User user, Medication brandName) {
-    SqlParams params = generateInsertSql(user, brandName);
+  public UserMedList saveUserMedList(User user, Medication medication) {
+    SqlParams params = generateInsertSql(user, medication);
+
+    KeyHolder keyHolder = new GeneratedKeyHolder();
+    jdbcTemplate.update(params.sql, params.source, keyHolder);
+
+    Long userMedsListPK = keyHolder.getKey().longValue();
+
+    // @formatter:off
+    return UserMedList.builder()
+            .userMedsListPK(userMedsListPK)
+            .user(user)
+            .medication(medication)
+            .build();
+    // @formatter:on
+
   }
 
-  private SqlParams generateInsertSql(User user, Medication brandName) {
+  private SqlParams generateInsertSql(User user, Medication medication) {
+    // @formatter:off
+    String sql = ""
+            +"INSERT INTO user_meds ("
+            + "user_fk , med_fk"
+            + ") VALUES ("
+            + ":user_fk , :med_fk"
+            + ")";
 
+    SqlParams params = new SqlParams();
+    params.sql = sql;
+    params.source.addValue("user_fk", user.getUserPK());
+    params.source.addValue("med_fk", medication.getMedPK());
+    return params;
+    // @formatter:on
   }
 
   @Override
-  public Optional<User> fetchUser(Long userPK, String pseudoName) {
+  public Optional<User> fetchUser(Long userPK) {
     // @formatter:off
     String sql = ""
             + "SELECT * "
             + "FROM users "
-            + "WHERE user_pk = :user_pk "
-            + "AND pseudo_name = :pseudo_name";
+            + "WHERE user_pk = :user_pk";
     // @formatter:on
+    System.out.println(userPK);
     Map<String, Object> params = new HashMap<>();
     params.put("user_pk", userPK.toString());
-    params.put("pseudo_name", pseudoName);
 
     return Optional.ofNullable(
             jdbcTemplate.query(sql, params, new CustomerResultSetExtractor()));
   }
 
   @Override
-  public Optional<Medication> fetchBrandName(Long medPK, String brandName) {
+  public Optional<Medication> fetchMedication(Long medPK) {
     // @formatter:off
     String sql = ""
             + "SELECT * "
             + "FROM medications "
-            + "WHERE medication_pk = :medication_pk "
-            + "AND brand_name = :brand_name";
+            + "WHERE med_pk = :med_pk";
     // @formatter:on
 
     Map<String, Object> params = new HashMap<>();
     params.put("med_pk", medPK.toString());
-    params.put("brand_name", brandName);
 
     return Optional.ofNullable(
             jdbcTemplate.query(sql, params, new BrandResultSetExtractor()));

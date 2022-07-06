@@ -8,10 +8,10 @@ import java.util.Optional;
 
 public interface UserMedListDao {
 
-    Optional<User> fetchUser(Long userPK, String pseudoName);
+    Optional<User> fetchUser(Long userPK);
 
-    Optional<Medication> fetchBrandName(Long medPK, String brandName);
+    Optional<Medication> fetchMedication(Long medPK);
 
-    UserMedList saveUserMedList(User user, Medication brandName );
+    UserMedList saveUserMedList(User user, Medication medication);
 
 }
