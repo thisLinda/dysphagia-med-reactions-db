@@ -111,7 +111,7 @@ class FetchReactionTest extends FetchReactionTestSupport {
     static Stream<Arguments> parametersForInvalidInput() {
 //          formatter:off
         return Stream.of(
-                arguments("SEVERE", "@#$%%^*", "Reaction contains non-alpha-numberic characters"),
+                arguments("SEVERE", "@#$%%^*", "Reaction contains non-alpha-numeric characters"),
                 arguments("SEVERE", "E".repeat(Constants.REACTION_MAX_LENGTH + 1), "Reaction length too long"),
                 arguments("INVALID", "tardive dyskinesia", "Severity is not enum value")
 //          formatter:on

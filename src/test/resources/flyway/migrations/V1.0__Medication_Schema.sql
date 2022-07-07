@@ -1,8 +1,8 @@
-DROP TABLE IF EXISTS ar_meds;
 DROP TABLE IF EXISTS generics;
-DROP TABLE IF EXISTS user_meds;
-DROP TABLE IF EXISTS medications;
+DROP TABLE IF EXISTS user_meds_list;
+DROP TABLE IF EXISTS med_adverse_reactions;
 DROP TABLE IF EXISTS adverse_reactions;
+DROP TABLE IF EXISTS medications;
 DROP TABLE IF EXISTS users;
 
 CREATE TABLE adverse_reactions (
@@ -30,22 +30,22 @@ CREATE TABLE users (
 	PRIMARY KEY (user_pk)
 );
 
-CREATE TABLE ar_meds (
-	ar_meds_pk int NOT NULL AUTO_INCREMENT,
-	reaction_fk int NOT NULL,
+CREATE TABLE med_adverse_reactions (
+	med_adverse_reaction_pk int NOT NULL AUTO_INCREMENT,
 	med_fk int NOT NULL,
-	PRIMARY KEY (ar_meds_pk),
-	FOREIGN KEY (reaction_fk) REFERENCES adverse_reactions (reaction_pk) ON DELETE CASCADE,
-	FOREIGN KEY (med_fk) REFERENCES medications (med_pk) ON DELETE CASCADE
+	reaction_fk int NOT NULL,
+	PRIMARY KEY (med_adverse_reaction_pk),
+	FOREIGN KEY (med_fk) REFERENCES medications (med_pk) ON DELETE CASCADE,
+	FOREIGN KEY (reaction_fk) REFERENCES adverse_reactions (reaction_pk) ON DELETE CASCADE
 );
 
-CREATE TABLE user_meds (
-	user_med_pk int NOT NULL AUTO_INCREMENT,
+CREATE TABLE user_meds_list (
+	user_meds_list_pk int NOT NULL AUTO_INCREMENT,
 	med_fk int NOT NULL,
 	user_fk int NOT NULL,
-	PRIMARY KEY (user_med_pk),
-	FOREIGN KEY (med_fk) REFERENCES medications (med_pk),
-	FOREIGN KEY (user_fk) REFERENCES users (user_pk)
+	PRIMARY KEY (user_meds_list_pk),
+	FOREIGN KEY (user_fk) REFERENCES users (user_pk),
+	FOREIGN KEY (med_fk) REFERENCES medications (med_pk)
 );
 
 CREATE TABLE generics (

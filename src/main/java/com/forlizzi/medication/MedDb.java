@@ -1,3 +1,4 @@
+// localhost:8080/swagger-ui/index.html
 package com.forlizzi.medication;
 
 import org.springframework.boot.SpringApplication;

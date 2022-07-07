@@ -45,10 +45,9 @@ public class CreateUserMedListTest extends CreateUserMedListTestSupport {
 
 //        And: the returned med list
     assertThat(response.getBody()).isNotNull();
-
     UserMedList userMedList = response.getBody();
-    assertThat(userMedList.getUser().getPseudoName()).isEqualTo("ClaireRF");
-    assertThat(userMedList.getMedication().getBrandName()).isEqualTo("Haldol");
+        assertThat(userMedList.getUser().getPseudoName()).isEqualTo("ClaireRF");
+        assertThat(userMedList.getMedication().getBrandName()).isEqualTo("Haldol");
     }
 
 }

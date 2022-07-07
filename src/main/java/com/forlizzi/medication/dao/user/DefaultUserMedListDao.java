@@ -23,69 +23,106 @@ public class DefaultUserMedListDao implements UserMedListDao {
   @Autowired
   private NamedParameterJdbcTemplate jdbcTemplate;
 
+//  @Override
+//  public UserMedList saveUserMedList(User pseudoName, Medication brandName) {
+//    SqlParams params = generateInsertSql(pseudoName, brandName);
+//
+//    KeyHolder keyHolder = new GeneratedKeyHolder();
+//    jdbcTemplate.update(params.sql, params.source, keyHolder);
+//
+//    // note to self: key needs to be unique value so using PK
+//    Long userMedsListPK = keyHolder.getKey().longValue();
+//
+//    // @formatter:off
+//    return UserMedList.builder()
+//            .userMedsListPK(userMedsListPK)
+//            .user(pseudoName)
+//            .medication(brandName)
+//            .build();
+//    // @formatter:on
+//
+//  }
+
   @Override
-  public UserMedList saveUserMedList(User user, Medication medication) {
-    SqlParams params = generateInsertSql(user, medication);
+  public UserMedList saveUserMedList(User userPK, Medication medPK) {
+    SqlParams params = generateInsertSql(userPK, medPK);
 
     KeyHolder keyHolder = new GeneratedKeyHolder();
     jdbcTemplate.update(params.sql, params.source, keyHolder);
 
+    // note to self: key needs to be unique value so using PK
     Long userMedsListPK = keyHolder.getKey().longValue();
 
     // @formatter:off
     return UserMedList.builder()
             .userMedsListPK(userMedsListPK)
-            .user(user)
-            .medication(medication)
+            .user(userPK)
+            .medication(medPK)
             .build();
     // @formatter:on
 
   }
 
-  private SqlParams generateInsertSql(User user, Medication medication) {
+  private SqlParams generateInsertSql(User userPK, Medication medPK) {
     // @formatter:off
     String sql = ""
-            +"INSERT INTO user_meds ("
-            + "user_fk , med_fk"
+            +"INSERT INTO user_meds_list ("
+            + "userPK , medPK"
             + ") VALUES ("
-            + ":user_fk , :med_fk"
+            + ":userPK , :medPK"
             + ")";
 
     SqlParams params = new SqlParams();
     params.sql = sql;
-    params.source.addValue("user_fk", user.getUserPK());
-    params.source.addValue("med_fk", medication.getMedPK());
+    params.source.addValue("userPK", userPK.getUserPK());
+    params.source.addValue("medPK", medPK.getMedPK());
     return params;
     // @formatter:on
   }
 
+//  private SqlParams generateInsertSql(User pseudoName, Medication brandName) {
+//    // @formatter:off
+//    String sql = ""
+//            +"INSERT INTO user_meds_list ("
+//            + "pseudoName , brandName"
+//            + ") VALUES ("
+//            + ":pseudoName , :brandName"
+//            + ")";
+//
+//    SqlParams params = new SqlParams();
+//    params.sql = sql;
+//    params.source.addValue("pseudoName", user.getPseudoName());
+//    params.source.addValue("brandName", medication.getBrandName());
+//    return params;
+//    // @formatter:on
+//  }
+
   @Override
-  public Optional<User> fetchUser(Long userPK) {
+  public Optional<User> fetchUser(String pseudoName) {
     // @formatter:off
     String sql = ""
             + "SELECT * "
             + "FROM users "
-            + "WHERE user_pk = :user_pk";
+            + "WHERE pseudo_name = :pseudo_name";
     // @formatter:on
-    System.out.println(userPK);
     Map<String, Object> params = new HashMap<>();
-    params.put("user_pk", userPK.toString());
+    params.put("pseudoName", pseudoName);
 
     return Optional.ofNullable(
             jdbcTemplate.query(sql, params, new CustomerResultSetExtractor()));
   }
 
   @Override
-  public Optional<Medication> fetchMedication(Long medPK) {
+  public Optional<Medication> fetchMedication(String brandName) {
     // @formatter:off
     String sql = ""
             + "SELECT * "
             + "FROM medications "
-            + "WHERE med_pk = :med_pk";
+            + "WHERE brand_name = :brand_name";
     // @formatter:on
 
     Map<String, Object> params = new HashMap<>();
-    params.put("med_pk", medPK.toString());
+    params.put("brand_name", brandName);
 
     return Optional.ofNullable(
             jdbcTemplate.query(sql, params, new BrandResultSetExtractor()));
