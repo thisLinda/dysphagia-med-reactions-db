@@ -12,6 +12,8 @@ public interface UserService {
     @Transactional
     User createUser(User user);
 
+    User createUser(String pseudoName);
+
     void updateUser(String pseudoName);
 
     void deleteUser(String pseudoName);

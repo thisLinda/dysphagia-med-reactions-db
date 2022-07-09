@@ -39,8 +39,15 @@ public class DefaultUserDao implements UserDao {
     }
 
     @Override
-    public User createUser(User user) {
+    public User createUser(String pseudoName) {
         // @formatter:off
+        String sql = ""
+                + "INSERT INTO users "
+                + "model_id, trim_level, num_doors, wheel_size, base_price"
+                + ") VALUES ("
+                + ":model_id, :trim_level, :num_doors, :wheel_size, :base_price"
+                + ");";
+        // @formatter:on
         return User.builder()
                 .pseudoName(pseudoName)
 //                .userPK(userPK)
@@ -51,7 +58,22 @@ public class DefaultUserDao implements UserDao {
 //                .txDxIcd(txDxICD)
                 .build();
         // @formatter:on
-        return null;
+    }
+
+    private SqlParams generateUpdateSql(String newPseudoName, String oldPseudoName, Long userPK) {
+        SqlParams params = new SqlParams();
+        //@formatter:off
+        String sql = ""
+                + ""
+                + "UPDATE users "
+                + "SET pseudo_name = :new_pseudo_name "
+                + "WHERE pseudo_name = :old_pseudo_name "
+                + "WHERE user_pk = :user_pk";
+        //@formatter:on
+        params.source.addValue("new_pseudo_name", newPseudoName);
+        params.source.addValue("old_pseudo_name", oldPseudoName);
+        params.source.addValue("user_pk", userPK);
+        return params;
     }
 
     @Override
@@ -67,8 +89,8 @@ public class DefaultUserDao implements UserDao {
     }
 
     @Override
-    public void updateUser(String pseudoName) {
-        SqlParams params = generateUpdateSql(pseudoName);
+    public void updateUser(String newPseudoName, String oldPseudoName, Long userPK) {
+        SqlParams params = generateUpdateSql(newPseudoName, oldPseudoName, userPK);
 
         jdbcTemplate.update(params.sql, params.source);
     }
@@ -83,36 +105,27 @@ public class DefaultUserDao implements UserDao {
                 + ":pseudo_name"
                 + ")";
         // @formatter:on
+
         params.sql = sql;
         params.source.addValue("pseudo_name", pseudoName);
         return params;
     }
 
-    private SqlParams generateUpdateSql(String newPseudoName, String oldPseudoName) {
-        SqlParams params = new SqlParams();
-        //@formatter:off
-        String sql = ""
-                + ""
-                + "UPDATE users "
-                + "SET pseudo_name = :new_pseudo_name "
-                + "WHERE pseudo_name = :old_pseudo_name";
-        //@formatter:on
-        params.source.addValue("new_pseudo_name", newPseudoName);
-        params.source.addValue("old_pseudo_name", oldPseudoName);
-        return params;
-    }
-
     @Override
-    public void deleteUser(String pseudoName) {
+    public void deleteUser(Long userPK) {
         //@formatter:off
         String sql = ""
                 + "DELETE FROM users "
-                + "WHERE pseudo_name = :pseudo_name";
-        //@formatter:on
-        Map<String, Object> params = new HashMap<>();
-        params.put("pseudo_name", pseudoName);
+                + "WHERE user_pk = :user_pk";
+        // @formatter:on
 
+        Map<String, Object> params = new HashMap<>();
+        params.put("user_pk", userPK);
+        // @formatter:off
         jdbcTemplate.update(sql, params);
+
+        // do I need an if here? (throw an exception)
+        // do I need generateDeleteSql?
     }
 
     class SqlParams {

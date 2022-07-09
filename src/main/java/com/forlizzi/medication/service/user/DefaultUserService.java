@@ -20,8 +20,8 @@ public class DefaultUserService implements UserService {
     }
 
     @Override
-    public User createUser(User user) {
-        return userDao.createUser(user);
+    public User createUser(String pseudoName) {
+
     }
 
     @Override
