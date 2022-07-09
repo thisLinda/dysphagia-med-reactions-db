@@ -43,9 +43,9 @@ public class DefaultUserDao implements UserDao {
         // @formatter:off
         String sql = ""
                 + "INSERT INTO users "
-                + "model_id, trim_level, num_doors, wheel_size, base_price"
+                + "pseudo_name "
                 + ") VALUES ("
-                + ":model_id, :trim_level, :num_doors, :wheel_size, :base_price"
+                + ":pseudo_name "
                 + ");";
         // @formatter:on
         return User.builder()
@@ -81,8 +81,8 @@ public class DefaultUserDao implements UserDao {
         // formatter:off
         String sql = ""
                 + "SELECT * FROM "
-                + "watchlist WHERE "
-                + "name = :watchlistName";
+                + "users WHERE "
+                + "pseudo_name = :pseudo_name";
         // formatter:on
 
         // what's next? template or map and build?
