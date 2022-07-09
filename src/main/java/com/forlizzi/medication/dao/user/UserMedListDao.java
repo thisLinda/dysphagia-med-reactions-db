@@ -15,8 +15,6 @@ public interface UserMedListDao {
 
     Optional<Medication> fetchMedication(String brandName);
 
-//    List<Medication> fetchAllMedications();
-
     UserMedList saveUserMedList(User pseudoName, Medication brandName);
 
 }

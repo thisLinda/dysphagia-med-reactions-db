@@ -64,18 +64,19 @@ public class DefaultUserMedListDao implements UserMedListDao {
   }
 
   private SqlParams generateInsertSql(User userPK, Medication medPK) {
+    SqlParams params = new SqlParams();
     // @formatter:off
     String sql = ""
             +"INSERT INTO user_meds_list ("
-            + "userPK , medPK"
+            + "user_pk , med_pk"
             + ") VALUES ("
-            + ":userPK , :medPK"
+            + ":user_pk , :med_pk"
             + ")";
 
-    SqlParams params = new SqlParams();
+
     params.sql = sql;
-    params.source.addValue("userPK", userPK.getUserPK());
-    params.source.addValue("medPK", medPK.getMedPK());
+    params.source.addValue("user_pk", userPK.getUserPK());
+    params.source.addValue("med_pk", medPK.getMedPK());
     return params;
     // @formatter:on
   }

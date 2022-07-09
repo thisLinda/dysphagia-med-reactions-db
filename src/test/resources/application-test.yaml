@@ -1,7 +1,0 @@
-spring:
-  datasource:
-    url: jdbc:h2:mem:medication_db;mode=MYSQL;IGNORECASE=TRUE
-logging:
-  level:
-    root: warn
-    '[com.forlizzi]': debug
