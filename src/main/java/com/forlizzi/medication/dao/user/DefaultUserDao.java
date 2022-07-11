@@ -2,12 +2,15 @@ package com.forlizzi.medication.dao.user;
 
 import com.forlizzi.medication.entity.user.User;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.jdbc.core.RowMapper;
 import org.springframework.jdbc.core.namedparam.MapSqlParameterSource;
 import org.springframework.jdbc.core.namedparam.NamedParameterJdbcTemplate;
-import org.springframework.jdbc.support.GeneratedKeyHolder;
-import org.springframework.jdbc.support.KeyHolder;
 import org.springframework.stereotype.Component;
+
+import java.sql.ResultSet;
+import java.sql.SQLException;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 @Component
@@ -16,51 +19,104 @@ public class DefaultUserDao implements UserDao {
     @Autowired
     private NamedParameterJdbcTemplate jdbcTemplate;
 
+//    @Override
+//    public User saveUser(String pseudoName) {
+//        SqlParams params = generateInsertSql(pseudoName);
+//
+//        KeyHolder keyHolder = new GeneratedKeyHolder();
+//        jdbcTemplate.update(params.sql, params.source, keyHolder);
+//
+//        Long userPK = keyHolder.getKey().longValue();
+//
+//        // @formatter:off
+//        return User.builder()
+//                .pseudoName(pseudoName)
+////                .userPK(userPK)
+////                .age(age)
+////                .dateOfEval(dateOfEval)
+////                .dateOfDischarge(dateOfDischarge)
+////                .medDxIcd(medDxIcd)
+////                .txDxIcd(txDxICD)
+//                .build();
+//        // @formatter:on
+//    }
+
+//    private SqlParams generateInsertSql(String pseudoName) {
+//        SqlParams params = new SqlParams();
+//        // @formatter:off
+//        String sql = ""
+//                +"INSERT INTO users ("
+//                + "pseudo_name"
+//                + ") VALUES ("
+//                + ":pseudo_name"
+//                + ")";
+//        // @formatter:on
+//
+//        params.sql = sql;
+//        params.source.addValue("pseudo_name", pseudoName);
+//        return params;
+//    }
+
     @Override
-    public User saveUser(String pseudoName) {
-        SqlParams params = generateInsertSql(pseudoName);
-
-        KeyHolder keyHolder = new GeneratedKeyHolder();
-        jdbcTemplate.update(params.sql, params.source, keyHolder);
-
-        Long userPK = keyHolder.getKey().longValue();
-
-        // @formatter:off
-        return User.builder()
-                .pseudoName(pseudoName)
-//                .userPK(userPK)
-//                .age(age)
-//                .dateOfEval(dateOfEval)
-//                .dateOfDischarge(dateOfDischarge)
-//                .medDxIcd(medDxIcd)
-//                .txDxIcd(txDxICD)
-                .build();
-        // @formatter:on
-    }
-
-    @Override
-    public User createUser(String pseudoName) {
+    public int createUser(int user_pk, String pseudo_name, int age, String date_of_eval, String date_of_discharge,
+                           String med_dx_icd, String tx_dx_icd) {
         // @formatter:off
         String sql = ""
-                + "INSERT INTO users "
-                + "pseudo_name "
+                + "INSERT INTO users ("
+                + "user_pk, pseudo_name, age, date_of_eval, date_of_discharge, med_dx_icd, tx_dx_icd "
                 + ") VALUES ("
-                + ":pseudo_name "
+                + ":user_pk, :pseudo_name, :age, :date_of_eval, :date_of_discharge, :med_dx_icd, :tx_dx_icd "
                 + ");";
         // @formatter:on
-        return User.builder()
-                .pseudoName(pseudoName)
-//                .userPK(userPK)
-//                .age(age)
-//                .dateOfEval(dateOfEval)
-//                .dateOfDischarge(dateOfDischarge)
-//                .medDxIcd(medDxIcd)
-//                .txDxIcd(txDxICD)
-                .build();
-        // @formatter:on
+        Map<String, Object> parameters = new HashMap<>();
+        parameters.put("user_pk", user_pk);
+        parameters.put("pseudo_name", pseudo_name);
+        parameters.put("age", age);
+        parameters.put("date_of_eval", date_of_eval);
+        parameters.put("date_of_discharge", date_of_discharge);
+        parameters.put("med_dx_icd", med_dx_icd);
+        parameters.put("tx_dx_icd", tx_dx_icd);
+
+        return jdbcTemplate.update(sql, parameters);
     }
 
-    private SqlParams generateUpdateSql(String newPseudoName, String oldPseudoName, Long userPK) {
+    @Override
+    public List<User> getUser(int user_pk) {
+        // formatter:off
+        String sql = ""
+                + "SELECT * "
+                + "FROM users "
+                + "WHERE user_pk = :user_pk";
+        Map<String, Object> params = new HashMap<>();
+        params.put("user_pk", user_pk);
+
+        return jdbcTemplate.query(sql, params, new RowMapper<>() {
+
+        @Override
+            public User mapRow(ResultSet rs, int rowNum) throws SQLException {
+                // @formatter:off
+                return User.builder()
+                    .userPK(rs.getInt("user_pk"))
+//                .pseudoName(pseudoName)
+//                .age(user.getAge())
+//                .dateOfEval(user.getDateOfEval())
+//                .dateOfDischarge(user.getDateOfDischarge())
+//                .medDxIcd(user.getMedDxIcd())
+//                .txDxIcd(user.getTxDxIcd())
+                    .build();
+                // formatter:on
+            }
+        });
+    }
+
+    @Override
+    public void updateUser(String newPseudoName, String oldPseudoName, int userPK) {
+        SqlParams params = generateUpdateSql(newPseudoName, oldPseudoName, userPK);
+
+        jdbcTemplate.update(params.sql, params.source);
+    }
+
+    private SqlParams generateUpdateSql(String newPseudoName, String oldPseudoName, int userPK) {
         SqlParams params = new SqlParams();
         //@formatter:off
         String sql = ""
@@ -77,56 +133,36 @@ public class DefaultUserDao implements UserDao {
     }
 
     @Override
-    public User getUser(String user) {
-        // formatter:off
-        String sql = ""
-                + "SELECT * FROM "
-                + "users WHERE "
-                + "pseudo_name = :pseudo_name";
-        // formatter:on
-
-        // what's next? template or map and build?
-    }
-
-    @Override
-    public void updateUser(String newPseudoName, String oldPseudoName, Long userPK) {
-        SqlParams params = generateUpdateSql(newPseudoName, oldPseudoName, userPK);
-
-        jdbcTemplate.update(params.sql, params.source);
-    }
-
-    private SqlParams generateInsertSql(String pseudoName) {
-        SqlParams params = new SqlParams();
-        // @formatter:off
-        String sql = ""
-                +"INSERT INTO users ("
-                + "pseudo_name"
-                + ") VALUES ("
-                + ":pseudo_name"
-                + ")";
-        // @formatter:on
-
-        params.sql = sql;
-        params.source.addValue("pseudo_name", pseudoName);
-        return params;
-    }
-
-    @Override
-    public void deleteUser(Long userPK) {
+    public void deleteUser(int userPK) {
         //@formatter:off
         String sql = ""
-                + "DELETE FROM users "
+                + "DELETE FROM"
+                + "users "
                 + "WHERE user_pk = :user_pk";
         // @formatter:on
 
         Map<String, Object> params = new HashMap<>();
         params.put("user_pk", userPK);
-        // @formatter:off
         jdbcTemplate.update(sql, params);
-
-        // do I need an if here? (throw an exception)
-        // do I need generateDeleteSql?
     }
+
+//    class UserResultSetExtractor implements ResultSetExtractor {
+//        @Override
+//        public User extractData(ResultSet rs) throws SQLException, DataAccessException {
+//            rs.next();
+//            // @formatter:off
+//            return User.builder()
+////                    .userPK(rs.getLong("user_pk"))
+//                    .pseudoName(rs.getString("pseudo_name"))
+////                    .age(rs.getInt("age"))
+////                    .dateOfEval(rs.getString("date_of_eval"))
+////                    .dateOfDischarge(rs.getString("date_of_discharge"))
+////                    .medDxIcd(rs.getString("med_dx_icd"))
+////                    .txDxIcd(rs.getString("tx_dx_icd"))
+//                    .build();
+//            // @formatter:on
+//        }
+//    }
 
     class SqlParams {
         String sql;

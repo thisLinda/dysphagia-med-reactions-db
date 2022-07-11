@@ -1,5 +1,8 @@
 package com.forlizzi.medication.controller.user;
 
+import com.forlizzi.medication.Constants;
+import com.forlizzi.medication.entity.reaction.Reaction;
+import com.forlizzi.medication.entity.reaction.ReactionSeverity;
 import com.forlizzi.medication.entity.user.User;
 import io.swagger.v3.oas.annotations.OpenAPIDefinition;
 import io.swagger.v3.oas.annotations.Operation;
@@ -54,15 +57,55 @@ public interface UserController {
                     @Parameter(
                             name = "user",
                             required = false,
-                            description = "Enter the user"),
+                            description = "Enter the new user's pseudoName"),
             }
     )
     @PostMapping
     @ResponseStatus(code = HttpStatus.CREATED)
-    User createUser(@Valid @RequestBody User user);
+    int createUser(@Valid @RequestBody int user_pk, String pseudo_name, int age, String date_of_eval,
+                   String date_of_discharge,
+                   String med_dx_icd, String tx_dx_icd);
 
     @Operation(
-            summary = "Update an existing User",
+            summary = "Returns a list of users",
+            description = "Returns a list of users by pseudoName",
+            responses = {
+                    @ApiResponse(
+                            responseCode = "200",
+                            description = "A list of users is returned.",
+                            content = @Content(
+                                    mediaType="application/json",
+                                    schema = @Schema(implementation = User.class))),
+                    @ApiResponse(
+                            responseCode = "400",
+                            description = "The request parameters are invalid.",
+                            content = @Content(
+                                    mediaType="application/json")),
+                    @ApiResponse(
+                            responseCode = "404",
+                            description = "No users were found with the input criteria.",
+                            content = @Content(
+                                    mediaType="application/json")),
+                    @ApiResponse(
+                            responseCode = "500",
+                            description = "An unplanned error occurred.",
+                            content = @Content(
+                                    mediaType="application/json"))
+            },
+            parameters = {
+                    @Parameter(
+                            name = "pseudoName",
+                            allowEmptyValue = false,
+                            required = false,
+                            description = "The pseudoName name."),
+            }
+    )
+    @GetMapping
+    @ResponseStatus(code = HttpStatus.OK)
+    User getUsers(@RequestParam String pseudoName);
+
+    @Operation(
+            summary = "Updates an existing User",
             description = "Returns a new/created User",
             responses = {
                     @ApiResponse(
@@ -90,13 +133,15 @@ public interface UserController {
             parameters = {
                     @Parameter(name = "pseudoName",
                             required = true,
-                            description = "A user/pseudo name to be updated"),
+                            description = "Enter the pseudoName that needs to be updated"),
             }
     )
     @PutMapping
     @ResponseStatus(code = HttpStatus.OK)
     void updateUser(
-            @RequestParam(required = true) String pseudoName);
+            @RequestParam(required = true) String newPseudoName, String oldPseudoName, int userPK);
+
+    void updateUser(String newPseudoName, String oldPseudoName, Long userPK);
 
     @Operation(
             summary = "Delete a user",
@@ -133,42 +178,4 @@ public interface UserController {
     @ResponseStatus(HttpStatus.OK)
     void deleteUser(@RequestParam String pseudoName);
 
-    @Operation(
-            summary = "Returns a list of User",
-            description = "Returns a list of User given a pseudoName",
-            responses = {
-                    @ApiResponse(
-                            responseCode = "200",
-                            description = "A list of Users is returned.",
-                            content = @Content(
-                                    mediaType="application/json",
-                                    schema = @Schema(implementation = User.class))),
-                    @ApiResponse(
-                            responseCode = "400",
-                            description = "The request parameters are invalid.",
-                            content = @Content(
-                                    mediaType="application/json")),
-                    @ApiResponse(
-                            responseCode = "404",
-                            description = "No Users were found with the input criteria.",
-                            content = @Content(
-                                    mediaType="application/json")),
-                    @ApiResponse(
-                            responseCode = "500",
-                            description = "An unplanned error occurred.",
-                            content = @Content(
-                                    mediaType="application/json"))
-            },
-            parameters = {
-                    @Parameter(
-                            name = "pseudoName",
-                            allowEmptyValue = false,
-                            required = false,
-                            description = "The pseudoName name."),
-            }
-    )
-    @GetMapping
-    @ResponseStatus(code = HttpStatus.OK)
-    User getUser(@RequestParam String pseudoName);
-    // @formatter:on
 }

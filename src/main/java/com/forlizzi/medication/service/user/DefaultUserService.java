@@ -4,8 +4,7 @@ import com.forlizzi.medication.dao.user.UserDao;
 import com.forlizzi.medication.entity.user.User;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-
-import java.util.List;
+import org.springframework.transaction.annotation.Transactional;
 
 @Service
 public class DefaultUserService implements UserService {
@@ -14,40 +13,36 @@ public class DefaultUserService implements UserService {
     private UserDao userDao;
 
     @Override
-    public User getUser(String user) {
-        return userDao.getUser(user);
-                // .orElseThrow(() -> new NoSuchElementException("User was not found"));
+    public User getUser(String pseudoName) {
+        return null;
     }
 
     @Override
-    public User createUser(String pseudoName) {
-
+    @Transactional
+    public int createUser(int user_pk, String pseudo_name, int age, String date_of_eval, String date_of_discharge,
+                           String med_dx_icd, String tx_dx_icd) {
+        int user = userDao.createUser(user_pk, pseudo_name, age, date_of_eval, date_of_discharge, med_dx_icd,
+                tx_dx_icd);
+        return user;
     }
 
-    @Override
-    public void updateUser(String pseudoName) {
+//    @Override
+//    public User getUser(String pseudoName) {
+//        return userDao.getUser(pseudoName);
+//        // .orElseThrow(() -> new NoSuchElementException("User was not found"));
+//    }
 
+    @Override
+    public void updateUser(String newPseudoName, String oldPseudoName, int userPK) {
     }
 
     @Override
     public void deleteUser(String pseudoName) {
-
     }
 
-    @Override
-    public List<User> fetchUsers(User pseudoName) {
-        return null;
-    }
-
-//    void deleteUser(String pseudoName);
-//    @Autowired
-//    private DeleteUserDao deleteUserDao;
-//
-//    @Transactional
 //    @Override
-//    public List<User> deleteUser(@Valid DeleteUser deleteUser) {
-//        String first_Name = deleteUser.getPseudoName();
-//        return deleteUserDao.saveUser(pseudoName);
+//    public List<User> fetchUsers(User pseudoName) {
+//        return null;
 //    }
 
 }

@@ -1,13 +1,17 @@
 package com.forlizzi.medication.entity.user;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
+import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
+import lombok.NoArgsConstructor;
 
 @Data
 @Builder
+//@AllArgsConstructor
+//@NoArgsConstructor
 public class User {
-    private Long userPK;
+    private int userPK;
     private String pseudoName;
     private int age;
     private String dateOfEval;
@@ -16,7 +20,7 @@ public class User {
     private String txDxIcd;
 
     @JsonIgnore
-    public Long getUserPK() {
+    public int getUserPK() {
         return userPK;
     }
 

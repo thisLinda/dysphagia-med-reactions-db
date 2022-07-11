@@ -135,7 +135,7 @@ public class DefaultUserMedListDao implements UserMedListDao {
       rs.next();
       // @formatter:off
       return User.builder()
-          .userPK(rs.getLong("user_pk"))
+          .userPK(rs.getInt("user_pk"))
           .pseudoName(rs.getString("pseudo_name"))
           .age(rs.getInt("age"))
           .dateOfEval(rs.getString("date_of_eval"))
