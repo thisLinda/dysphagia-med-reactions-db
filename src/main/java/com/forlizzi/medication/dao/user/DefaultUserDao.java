@@ -21,17 +21,14 @@ public class DefaultUserDao implements UserDao {
     private NamedParameterJdbcTemplate jdbcTemplate;
 
     @Override
-    public int createUser(int user_pk, String pseudo_name, int age, String date_of_eval, String date_of_discharge,
-                           String med_dx_icd, String tx_dx_icd) {
+    public int createUser(int user_pk, String pseudo_name, int age, String date_of_eval, String date_of_discharge, String med_dx_icd, String tx_dx_icd) {
         SqlParams params = generateInsertSql(user_pk, pseudo_name, age, date_of_eval, date_of_discharge, med_dx_icd, tx_dx_icd);
 
         KeyHolder keyHolder = new GeneratedKeyHolder();
         return jdbcTemplate.update(params.sql, params.source, keyHolder);
     }
 
-    private SqlParams generateInsertSql(int userPK, String pseudoName, int age, String dateOfEval,
-                                        String dateOfDischarge,
-                                        String medDxIcd, String txDxIcd) {
+    private SqlParams generateInsertSql(int userPK, String pseudoName, int age, String dateOfEval, String dateOfDischarge, String medDxIcd, String txDxIcd) {
         // @formatter:off
         String sql = ""
                 + "INSERT INTO users ("
@@ -40,7 +37,6 @@ public class DefaultUserDao implements UserDao {
                 + ":user_pk, :pseudo_name, :age, :date_of_eval, :date_of_discharge, :med_dx_icd, :tx_dx_icd"
                 + ")";
         // @formatter:on
-
         SqlParams params = new SqlParams();
 
         params.sql = sql;
@@ -63,7 +59,6 @@ public class DefaultUserDao implements UserDao {
                 + "WHERE user_pk = :user_pk";
         Map<String, Object> params = new HashMap<>();
         params.put("user_pk", user_pk);
-
         return jdbcTemplate.query(sql, params, new RowMapper<>() {
 
         @Override
@@ -83,53 +78,27 @@ public class DefaultUserDao implements UserDao {
         });
     }
 
-//    @Override
-//    public List<User> getUsers(String pseudoName) {
-//        log.debug("DAO: pseudoName={}", pseudoName);
-//
-//        // @formatter:off
-//        String sql = ""
-//                + "SELECT * "
-//                + "FROM users "
-//                + "WHERE pseudoName = :pseudoName";
-//        // @formatter:on
-//
-//        Map<String, Object> params = new HashMap<>();
-//        params.put("pseudo_name", pseudoName);
-//
-//        return jdbcTemplate.query(sql, params, (rs, rowNum) -> {
-//            // @formatter:off
-//            return Reaction.builder()
-//                    .pseudoName(rs.getString("pseudoName"))
-//                    .build();
-//            // @formatter:on
-//        });
-//    }
-
     @Override
     public void updateUser(String newPseudoName, int userPK) {
-//        SqlParams params = generateUpdateSql(newPseudoName, oldPseudoName, userPK);
         SqlParams params = generateUpdateSql(newPseudoName, userPK);
         KeyHolder keyHolder = new GeneratedKeyHolder();
         jdbcTemplate.update(params.sql, params.source, keyHolder);
     }
 
-////    private SqlParams generateUpdateSql(String newPseudoName, String oldPseudoName, int userPK) {
-//    private SqlParams generateUpdateSql(String newPseudoName, int userPK) {
-//        SqlParams params = new SqlParams();
-//        //@formatter:off
-//        String sql = ""
-//                + ""
-//                + "UPDATE users "
-//                + "SET pseudo_name = :new_pseudo_name "
-////                + "WHERE pseudo_name = :old_pseudo_name "
-//                + "AND user_pk = :user_pk";
-//        //@formatter:on
-//        params.source.addValue("new_pseudo_name", newPseudoName);
-////        params.source.addValue("old_pseudo_name", oldPseudoName);
-//        params.source.addValue("user_pk", userPK);
-//        return params;
-//    }
+    private SqlParams generateUpdateSql(String newPseudoName, int userPK) {
+        //@formatter:off
+        String sql = ""
+                + ""
+                + "UPDATE users "
+                + "SET pseudo_name = :new_pseudo_name "
+                + "WHERE user_pk = :user_pk";
+        //@formatter:on
+        SqlParams params = new SqlParams();
+        params.sql = sql;
+        params.source.addValue("new_pseudo_name", newPseudoName);
+        params.source.addValue("user_pk", userPK);
+        return params;
+    }
 
     @Override
     public void deleteUser(int userPK) {
@@ -144,24 +113,6 @@ public class DefaultUserDao implements UserDao {
         params.put("user_pk", userPK);
         jdbcTemplate.update(sql, params);
     }
-
-//    class UserResultSetExtractor implements ResultSetExtractor {
-//        @Override
-//        public User extractData(ResultSet rs) throws SQLException, DataAccessException {
-//            rs.next();
-//            // @formatter:off
-//            return User.builder()
-////                    .userPK(rs.getLong("user_pk"))
-//                    .pseudoName(rs.getString("pseudo_name"))
-////                    .age(rs.getInt("age"))
-////                    .dateOfEval(rs.getString("date_of_eval"))
-////                    .dateOfDischarge(rs.getString("date_of_discharge"))
-////                    .medDxIcd(rs.getString("med_dx_icd"))
-////                    .txDxIcd(rs.getString("tx_dx_icd"))
-//                    .build();
-//            // @formatter:on
-//        }
-//    }
 
     class SqlParams {
         String sql;

@@ -22,12 +22,6 @@ public class DefaultUserService implements UserService {
         return user;
     }
 
-//    @Override
-//    public User getUser(String pseudoName) {
-//        return userDao.getUser(pseudoName);
-//        // .orElseThrow(() -> new NoSuchElementException("User was not found"));
-//    }
-
     @Transactional(readOnly = true)
     @Override
     public List<User> getUsers(int userPK) {
@@ -35,7 +29,6 @@ public class DefaultUserService implements UserService {
 
         if(users.isEmpty()) {
             String msg = String.format("No users found with userPK=%s", userPK);
-
             throw new NoSuchElementException(msg);
         }
         return users;
@@ -49,10 +42,5 @@ public class DefaultUserService implements UserService {
     @Override
     public void deleteUser(int userPK) {
     }
-
-//    @Override
-//    public List<User> fetchUsers(User pseudoName) {
-//        return null;
-//    }
 
 }

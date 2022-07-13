@@ -18,7 +18,6 @@ public class DefaultReactionController implements ReactionController {
 
     @Override
     public List<Reaction> fetchReactions(ReactionSeverity severity, String reaction) {
-//        log.info("severity={}, reaction={}", severity, reaction);
         log.debug("severity={}, reaction={}", severity, reaction);
         return reactionService.fetchReactions(severity, reaction);
     }

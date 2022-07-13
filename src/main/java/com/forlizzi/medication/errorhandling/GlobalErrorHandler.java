@@ -8,7 +8,6 @@ import org.springframework.web.bind.annotation.RestControllerAdvice;
 import org.springframework.web.context.request.ServletWebRequest;
 import org.springframework.web.context.request.WebRequest;
 import org.springframework.web.method.annotation.MethodArgumentTypeMismatchException;
-
 import javax.validation.ConstraintViolationException;
 import java.time.ZonedDateTime;
 import java.time.format.DateTimeFormatter;
@@ -58,7 +57,6 @@ public class GlobalErrorHandler {
         }
         error.put("message", e.toString());
         error.put("status code", status.value());
-//        error.put("uri", webRequest.getContextPath());
         error.put("timestamp", timestamp);
         error.put("reason", status.getReasonPhrase());
 

@@ -1,4 +1,5 @@
 package com.forlizzi.medication.service.reaction;
+
 import com.forlizzi.medication.dao.reaction.ReactionDao;
 import com.forlizzi.medication.entity.reaction.Reaction;
 import com.forlizzi.medication.entity.reaction.ReactionSeverity;

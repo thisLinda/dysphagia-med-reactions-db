@@ -6,4 +6,5 @@ import com.forlizzi.medication.entity.user.UserMedListRequest;
 public interface UserMedListService {
 
     UserMedList createUserMedList(UserMedListRequest userMedListRequest);
+
 }
