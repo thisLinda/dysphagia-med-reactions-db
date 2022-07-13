@@ -19,4 +19,5 @@ public class DefaultUserMedListController implements UserMedListController {
         log.debug("UserMedList={}", userMedListRequest);
         return userMedListService.createUserMedList(userMedListRequest);
     }
+
 }

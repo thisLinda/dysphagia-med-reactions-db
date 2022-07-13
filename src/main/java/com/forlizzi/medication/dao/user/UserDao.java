@@ -1,5 +1,7 @@
 package com.forlizzi.medication.dao.user;
 
+import com.forlizzi.medication.entity.reaction.Reaction;
+import com.forlizzi.medication.entity.reaction.ReactionSeverity;
 import com.forlizzi.medication.entity.user.User;
 
 import java.util.List;
@@ -11,9 +13,9 @@ public interface UserDao {
 
 //    User saveUser(String pseudoName);
 
-    List<User> getUser(int user_pk);
+    List<User> getUsers(int user_pk);
 
-    void updateUser(String newPseudoName, String oldPseudoName, int userPK);
+    void updateUser(String newPseudoName, int userPK);
 
     void deleteUser(int userPK);
 

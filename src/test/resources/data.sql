@@ -47,7 +47,7 @@ INSERT INTO generics (generic_name, med_fk) VALUES('levothyroxine sodium', 11);
 -- Users
 INSERT INTO users (pseudo_name, age, date_of_eval, date_of_discharge, med_dx_icd, tx_dx_icd) VALUES('ClaireRF', 50, '01/01/21', '02/02/21', 'I69.391', 'R13.12');
 INSERT INTO users (pseudo_name, age, date_of_eval, date_of_discharge, med_dx_icd, tx_dx_icd) VALUES('JamesMF', 47, '03/03/21', '04/04/21', 'G20', 'R13.12');
-INSERT INTO users (pseudo_name, age, date_of_eval, date_of_discharge, med_dx_icd, tx_dx_icd) VALUES('BriannaFW', 31, '05/05/21', '06/06/21', 'G31.83', 'R13.11');
+INSERT INTO users (pseudo_name, age, date_of_eval, date_of_discharge, med_dx_icd, tx_dx_icd) VALUES('BriannaRW', 31, '05/05/21', '06/06/21', 'G31.83', 'R13.11');
 INSERT INTO users (pseudo_name, age, date_of_eval, date_of_discharge, med_dx_icd, tx_dx_icd) VALUES('RogerW', 39, '07/07/21', '08/08/21', 'K20.0', 'R13.14');
 
 -- User Meds List

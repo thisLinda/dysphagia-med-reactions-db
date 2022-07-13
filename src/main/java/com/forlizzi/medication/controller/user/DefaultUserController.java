@@ -6,6 +6,8 @@ import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.RestController;
 
+import java.util.List;
+
 @RestController
 @Slf4j
 public class DefaultUserController implements UserController {
@@ -22,20 +24,22 @@ public class DefaultUserController implements UserController {
     }
 
     @Override
-    public void updateUser(String newPseudoName, String oldPseudoName, int userPK) {
-        log.debug("OldPseudoName={}, NewPseudoName={}, UserPK={}", newPseudoName, oldPseudoName, userPK);
-        userService.updateUser(newPseudoName, oldPseudoName, userPK);
+    public List<User> getUsers(int userPK) {
+            return userService.getUsers(userPK);
     }
 
     @Override
-    public void updateUser(String newPseudoName, String oldPseudoName, Long userPK) {
-
+    public void updateUser(String newPseudoName, int userPK) {
+//        log.debug("NewPseudoName={}, OldPseudoName={}, UserPK={}", newPseudoName, oldPseudoName, userPK);
+//        userService.updateUser(newPseudoName, oldPseudoName, userPK);
+        log.debug("NewPseudoName={},UserPK={}", newPseudoName, userPK);
+        userService.updateUser(newPseudoName, userPK);
     }
 
     @Override
-    public void deleteUser(String pseudoName) {
-        log.debug("DeletedUserPseudoName:{}", pseudoName);
-        userService.deleteUser(pseudoName);
+    public void deleteUser(int userPK) {
+        log.debug("DeletedUserPK:{}", userPK);
+        userService.deleteUser(userPK);
     }
 
 //    @Override

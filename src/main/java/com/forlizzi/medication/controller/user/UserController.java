@@ -28,7 +28,7 @@ public interface UserController {
 
     //    @formatter:off
     @Operation(
-            summary = "Create a user",
+            summary = "Creates a user",
             description = "Returns user",
             responses = {
                     @ApiResponse(
@@ -62,13 +62,11 @@ public interface UserController {
     )
     @PostMapping
     @ResponseStatus(code = HttpStatus.CREATED)
-    int createUser(@Valid @RequestBody int user_pk, String pseudo_name, int age, String date_of_eval,
-                   String date_of_discharge,
-                   String med_dx_icd, String tx_dx_icd);
+    int createUser(@Valid int user_pk, String pseudo_name, int age, String date_of_eval, String date_of_discharge, String med_dx_icd, String tx_dx_icd);
 
     @Operation(
             summary = "Returns a list of users",
-            description = "Returns a list of users by pseudoName",
+            description = "Returns a list of users by userPK",
             responses = {
                     @ApiResponse(
                             responseCode = "200",
@@ -94,19 +92,19 @@ public interface UserController {
             },
             parameters = {
                     @Parameter(
-                            name = "pseudoName",
+                            name = "userPK",
                             allowEmptyValue = false,
-                            required = false,
-                            description = "The pseudoName name."),
+                            required = true,
+                            description = "userPK"),
             }
     )
     @GetMapping
     @ResponseStatus(code = HttpStatus.OK)
-    User getUsers(@RequestParam String pseudoName);
+    List<User> getUsers(@RequestParam int userPK);
 
     @Operation(
-            summary = "Updates an existing User",
-            description = "Returns a new/created User",
+            summary = "Updates an existing user",
+            description = "Returns a new/created user",
             responses = {
                     @ApiResponse(
                             responseCode = "201",
@@ -129,22 +127,21 @@ public interface UserController {
                             description = "An unplanned error occurred",
                             content = @Content(
                                     mediaType = "application/json"))
-            },
-            parameters = {
-                    @Parameter(name = "pseudoName",
-                            required = true,
-                            description = "Enter the pseudoName that needs to be updated"),
             }
+//            parameters = {
+//                    @Parameter(name = "pseudoName",
+//                            required = true,
+//                            description = "Enter the pseudoName that needs to be updated"),
+//            }
     )
     @PutMapping
     @ResponseStatus(code = HttpStatus.OK)
     void updateUser(
-            @RequestParam(required = true) String newPseudoName, String oldPseudoName, int userPK);
-
-    void updateUser(String newPseudoName, String oldPseudoName, Long userPK);
+//            @RequestParam(required = true)
+                    String newPseudoName, int userPK);
 
     @Operation(
-            summary = "Delete a user",
+            summary = "Deletes a user",
             description = "Deletes a user",
             responses = {
                     @ApiResponse(
@@ -168,14 +165,14 @@ public interface UserController {
             },
             parameters = {
                     @Parameter(
-                            name = "PseudoName",
+                            name = "UserPK",
                             allowEmptyValue = false,
                             required = false,
-                            description = "Enter the pseudoName to be deleted"),
+                            description = "Enter the userPK to be deleted"),
             }
     )
     @DeleteMapping
     @ResponseStatus(HttpStatus.OK)
-    void deleteUser(@RequestParam String pseudoName);
+    void deleteUser(@RequestParam int userPK);
 
 }
