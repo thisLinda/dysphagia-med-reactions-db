@@ -31,7 +31,7 @@ public class DefaultUserMedListDao implements UserMedListDao {
 //    jdbcTemplate.update(params.sql, params.source, keyHolder);
 //
 //    // note to self: key needs to be unique value so using PK
-//    Long userMedsListPK = keyHolder.getKey().longValue();
+//    int userMedsListPK = keyHolder.getKey().intValue();
 //
 //    // @formatter:off
 //    return UserMedList.builder()
@@ -51,7 +51,7 @@ public class DefaultUserMedListDao implements UserMedListDao {
     jdbcTemplate.update(params.sql, params.source, keyHolder);
 
     // note to self: key needs to be unique value so using PK
-    Long userMedsListPK = keyHolder.getKey().longValue();
+    int userMedsListPK = keyHolder.getKey().intValue();
 
     // @formatter:off
     return UserMedList.builder()
@@ -153,7 +153,7 @@ public class DefaultUserMedListDao implements UserMedListDao {
       rs.next();
       // @formatter:off
       return Medication.builder()
-          .medPK(rs.getLong("med_pk"))
+          .medPK(rs.getInt("med_pk"))
           .brandName(rs.getString("brand_name"))
           .hasReaction(rs.getBoolean("has_reaction"))
           .build();

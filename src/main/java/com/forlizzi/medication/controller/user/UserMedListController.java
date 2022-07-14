@@ -27,12 +27,12 @@ public interface UserMedListController {
 
     //    @formatter:off
     @Operation(
-            summary = "Create a user med list",
-            description = "Returns the user's med list",
+            summary = "Creates a user med",
+            description = "Returns a user's med.",
             responses = {
                     @ApiResponse(
                             responseCode = "201",
-                            description = "The created med list is returned",
+                            description = "The created med is returned",
                             content = @Content(
                                     mediaType="application/json",
                                     schema = @Schema(implementation = UserMedList.class))),

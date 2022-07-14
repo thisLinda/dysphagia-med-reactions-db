@@ -29,12 +29,12 @@ public interface ReactionController {
 
     //    @formatter:off
     @Operation(
-            summary = "Returns a list of medication adverse reactions",
-            description = "Returns the adverse reaction",
+            summary = "Returns a severity and an adverse reaction.",
+            description = "Returns a severity and an adverse reaction.",
             responses = {
                     @ApiResponse(
                             responseCode = "200",
-                            description = "The adverse reaction is returned",
+                            description = "The severity and adverse reaction is returned.",
                             content = @Content(
                                     mediaType="application/json",
                                     schema = @Schema(implementation = Reaction.class))),
@@ -45,7 +45,7 @@ public interface ReactionController {
                                     mediaType="application/json")),
                     @ApiResponse(
                             responseCode = "404",
-                            description = "A reaction component was found with the input criteria",
+                            description = "No severity/reaction found with the input criteria.",
                             content = @Content(
                                     mediaType="application/json")),
                     @ApiResponse(
@@ -70,11 +70,11 @@ public interface ReactionController {
     @GetMapping
     @ResponseStatus(code = HttpStatus.OK)
     List<Reaction> fetchReactions(
-            @RequestParam(required = false)
+            @RequestParam(required = true)
                     ReactionSeverity severity,
             @Length(max = Constants.REACTION_MAX_LENGTH)
             @Pattern(regexp = "[\\w\\s]*")
-            @RequestParam(required = false)
+            @RequestParam(required = true)
                     String reaction);
     //    @formatter:on
 

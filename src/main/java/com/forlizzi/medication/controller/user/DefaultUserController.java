@@ -24,7 +24,7 @@ public class DefaultUserController implements UserController {
 
     @Override
     public List<User> getUsers(int userPK) {
-            return userService.getUsers(userPK);
+        return userService.getUsers(userPK);
     }
 
     @Override

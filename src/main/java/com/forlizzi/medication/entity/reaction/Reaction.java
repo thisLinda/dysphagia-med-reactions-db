@@ -9,7 +9,7 @@ import java.util.Comparator;
 @NoArgsConstructor
 @AllArgsConstructor
 public class Reaction implements Comparable<Reaction> {
-    private Long reactionPK;
+    private int reactionPK;
     private ReactionSeverity severity;
     private String reaction;
 
@@ -24,7 +24,7 @@ public class Reaction implements Comparable<Reaction> {
     }
 
     @JsonIgnore
-    public Long getReactionPK() {
+    public int getReactionPK() {
         return reactionPK;
     }
 

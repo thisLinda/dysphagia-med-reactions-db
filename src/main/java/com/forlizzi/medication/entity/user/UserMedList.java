@@ -7,12 +7,12 @@ import lombok.Data;
 @Data
 @Builder
 public class UserMedList {
-    private Long userMedsListPK;
+    private int userMedsListPK;
     private User user;
     private Medication medication;
 
     @JsonIgnore
-    public Long getUserMedsListPK() {
+    public int getUserMedsListPK() {
         return userMedsListPK;
     }
 
