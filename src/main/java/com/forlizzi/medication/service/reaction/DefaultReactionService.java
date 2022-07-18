@@ -20,13 +20,14 @@ public class DefaultReactionService implements ReactionService {
 
     @Transactional(readOnly = true)
     @Override
-    public List<Reaction> fetchReactions(ReactionSeverity severity, String reaction) {
-        log.info("The fetchReaction method was called with severity={} and reaction={}", severity, reaction);
+    public List<Reaction> fetchReactions(ReactionSeverity reactionSeverity, String reaction) {
+        log.info("The fetchReaction method was called with severity={} and reaction={}", reactionSeverity, reaction);
         
-        List<Reaction> reactions = reactionDao.fetchReactions(severity, reaction);
+        List<Reaction> reactions = reactionDao.fetchReactions(reactionSeverity, reaction);
 
         if(reactions.isEmpty()) {
-            String msg = String.format("No reactions found with severity=%s and reaction=%s", severity, reaction);
+            String msg = String.format("No reactions found with severity=%s and reaction=%s", reactionSeverity,
+                    reaction);
 
             throw new NoSuchElementException(msg);
         }

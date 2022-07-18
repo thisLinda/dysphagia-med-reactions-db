@@ -1,20 +1,21 @@
 package com.forlizzi.medication.dao.user;
 
-import com.forlizzi.medication.entity.reaction.Reaction;
-import com.forlizzi.medication.entity.reaction.ReactionSeverity;
 import com.forlizzi.medication.entity.user.Medication;
 import com.forlizzi.medication.entity.user.User;
 import com.forlizzi.medication.entity.user.UserMedList;
 
-import java.util.List;
 import java.util.Optional;
 
 public interface UserMedListDao {
 
-    Optional<User> fetchUser(String pseudoName);
+    UserMedList createUserMedList(User user, Medication medication);
 
-    Optional<Medication> fetchMedication(String brandName);
+    Optional<User> fetchUser(int userPK);
 
-    UserMedList saveUserMedList(User pseudoName, Medication brandName);
+    Optional<Medication> fetchMedication(int medPK);
+
+    Optional<User> fetchUserByPseudoName(String pseudoName);
+
+    Optional<Medication> fetchMedicationByBrandName(String brandName);
 
 }

@@ -1,22 +1,22 @@
 -- Mild
-INSERT INTO adverse_reactions (severity, reaction) VALUES('mild', 'dysgeusia');
-INSERT INTO adverse_reactions (severity, reaction) VALUES('mild', 'gastroesophageal reflux');
-INSERT INTO adverse_reactions (severity, reaction) VALUES('mild', 'xerostomia');
+INSERT INTO adverse_reactions (reaction_severity, reaction) VALUES('mild', 'dysgeusia');
+INSERT INTO adverse_reactions (reaction_severity, reaction) VALUES('mild', 'gastroesophageal reflux');
+INSERT INTO adverse_reactions (reaction_severity, reaction) VALUES('mild', 'xerostomia');
 
 -- Moderate
-INSERT INTO adverse_reactions (severity, reaction) VALUES('moderate', 'dysphagia');
-INSERT INTO adverse_reactions (severity, reaction) VALUES('moderate', 'esophagitis');
-INSERT INTO adverse_reactions (severity, reaction) VALUES('moderate', 'glossitis');
-INSERT INTO adverse_reactions (severity, reaction) VALUES('moderate', 'oral ulceration');
-INSERT INTO adverse_reactions (severity, reaction) VALUES('moderate', 'pneumonitis');
+INSERT INTO adverse_reactions (reaction_severity, reaction) VALUES('moderate', 'dysphagia');
+INSERT INTO adverse_reactions (reaction_severity, reaction) VALUES('moderate', 'esophagitis');
+INSERT INTO adverse_reactions (reaction_severity, reaction) VALUES('moderate', 'glossitis');
+INSERT INTO adverse_reactions (reaction_severity, reaction) VALUES('moderate', 'oral ulceration');
+INSERT INTO adverse_reactions (reaction_severity, reaction) VALUES('moderate', 'pneumonitis');
 
 -- Severe
-INSERT INTO adverse_reactions (severity, reaction) VALUES('severe', 'bronchospasm');
-INSERT INTO adverse_reactions (severity, reaction) VALUES('severe', 'esophageal stricture');
-INSERT INTO adverse_reactions (severity, reaction) VALUES('severe', 'esophageal ulceration');
-INSERT INTO adverse_reactions (severity, reaction) VALUES('severe', 'laryngeal edema');
-INSERT INTO adverse_reactions (severity, reaction) VALUES('severe', 'laryngospasm');
-INSERT INTO adverse_reactions (severity, reaction) VALUES('severe', 'tardive dyskinesia');
+INSERT INTO adverse_reactions (reaction_severity, reaction) VALUES('severe', 'bronchospasm');
+INSERT INTO adverse_reactions (reaction_severity, reaction) VALUES('severe', 'esophageal stricture');
+INSERT INTO adverse_reactions (reaction_severity, reaction) VALUES('severe', 'esophageal ulceration');
+INSERT INTO adverse_reactions (reaction_severity, reaction) VALUES('severe', 'laryngeal edema');
+INSERT INTO adverse_reactions (reaction_severity, reaction) VALUES('severe', 'laryngospasm');
+INSERT INTO adverse_reactions (reaction_severity, reaction) VALUES('severe', 'tardive dyskinesia');
 
 -- Medications
 INSERT INTO medications (brand_name, has_reaction) VALUES('Haldol', true);
@@ -28,8 +28,6 @@ INSERT INTO medications (brand_name, has_reaction) VALUES('Ditropan XL', true);
 INSERT INTO medications (brand_name, has_reaction) VALUES('Coumadin', true);
 INSERT INTO medications (brand_name, has_reaction) VALUES('Celexa', true);
 INSERT INTO medications (brand_name, has_reaction) VALUES('Protonix', true);
-INSERT INTO medications (brand_name, has_reaction) VALUES('Ergomar', false);
-INSERT INTO medications (brand_name, has_reaction) VALUES('Synthroid', false);
 
 -- Generics
 INSERT INTO generics (generic_name, med_fk) VALUES('haloperidol', 1);
@@ -41,8 +39,6 @@ INSERT INTO generics (generic_name, med_fk) VALUES('oxybutynin chloride', 7);
 INSERT INTO generics (generic_name, med_fk) VALUES('warfarin sodium', 9);
 INSERT INTO generics (generic_name, med_fk) VALUES('citalopram hydrobromide', 8);
 INSERT INTO generics (generic_name, med_fk) VALUES('pantoprazole sodium', 9);
-INSERT INTO generics (generic_name, med_fk) VALUES('ergotamine tartrate', 10);
-INSERT INTO generics (generic_name, med_fk) VALUES('levothyroxine sodium', 11);
 
 -- Users
 INSERT INTO users (pseudo_name, age, date_of_eval, date_of_discharge, med_dx_icd, tx_dx_icd) VALUES('ClaireRF', 50, '01/01/21', '02/02/21', 'I69.391', 'R13.12');
@@ -52,7 +48,6 @@ INSERT INTO users (pseudo_name, age, date_of_eval, date_of_discharge, med_dx_icd
 
 -- User Meds List
 INSERT INTO user_meds_list (user_fk, med_fk) VALUES(1, 9);
-INSERT INTO user_meds_list (user_fk, med_fk) VALUES(1, 11);
 INSERT INTO user_meds_list (user_fk, med_fk) VALUES(2, 8);
 INSERT INTO user_meds_list (user_fk, med_fk) VALUES(2, 7);
 INSERT INTO user_meds_list (user_fk, med_fk) VALUES(3, 1);
@@ -60,7 +55,6 @@ INSERT INTO user_meds_list (user_fk, med_fk) VALUES(3, 5);
 INSERT INTO user_meds_list (user_fk, med_fk) VALUES(3, 4);
 INSERT INTO user_meds_list (user_fk, med_fk) VALUES(3, 2);
 INSERT INTO user_meds_list (user_fk, med_fk) VALUES(4, 3);
-INSERT INTO user_meds_list (user_fk, med_fk) VALUES(4, 10);
 
 -- Med Adverse Reactions
 INSERT INTO med_adverse_reactions (med_fk, reaction_fk) VALUES (1, 12);

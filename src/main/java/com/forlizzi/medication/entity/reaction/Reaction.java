@@ -10,14 +10,14 @@ import java.util.Comparator;
 @AllArgsConstructor
 public class Reaction implements Comparable<Reaction> {
     private int reactionPK;
-    private ReactionSeverity severity;
+    private ReactionSeverity reactionSeverity;
     private String reaction;
 
     @Override
     public int compareTo(Reaction that) {
         // @formatter:off
         return Comparator
-                .comparing(Reaction::getSeverity)
+                .comparing(Reaction::getReactionSeverity)
                 .thenComparing(Reaction::getReaction)
                 .compare(this, that);
         // @formatter:on

@@ -7,10 +7,10 @@ import java.util.List;
 public interface ReactionService {
 
     /*
-     * @param severity
+     * @param reactionSeverity
      * @param reaction
      * @return
      */
-    List<Reaction> fetchReactions(ReactionSeverity severity, String reaction);
+    List<Reaction> fetchReactions(ReactionSeverity reactionSeverity, String reaction);
 
 }

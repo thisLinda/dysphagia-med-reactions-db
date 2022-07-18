@@ -7,6 +7,6 @@ import java.util.List;
 
 public interface ReactionDao {
 
-    List<Reaction> fetchReactions(ReactionSeverity severity, String reaction);
+    List<Reaction> fetchReactions(ReactionSeverity reactionSeverity, String reaction);
 
 }

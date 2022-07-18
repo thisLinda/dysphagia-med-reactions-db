@@ -8,8 +8,8 @@ import lombok.Data;
 @Builder
 public class UserMedList {
     private int userMedsListPK;
-    private User user;
-    private Medication medication;
+    private User pseudoName;
+    private Medication brandName;
 
     @JsonIgnore
     public int getUserMedsListPK() {

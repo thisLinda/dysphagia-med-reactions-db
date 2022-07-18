@@ -19,25 +19,25 @@ public class DefaultUserMedListService implements UserMedListService{
     @Transactional
     @Override
     public UserMedList createUserMedList(UserMedListRequest userMedListRequest) {
-        User pseudoName = getUser(userMedListRequest);
-        Medication brandName = getMedication(userMedListRequest);
+        User user = getUser(userMedListRequest);
+        Medication medication = getMedication(userMedListRequest);
 
-        return userMedListDao.saveUserMedList(pseudoName, brandName);
+        return userMedListDao.createUserMedList(user, medication);
     }
 
     protected User getUser(UserMedListRequest userMedListRequest) {
         return userMedListDao
-                .fetchUser(userMedListRequest.getUser())
+                .fetchUserByPseudoName(userMedListRequest.getUser())
                 .orElseThrow(()
-                -> new NoSuchElementException("User with pseudoName="
+                        -> new NoSuchElementException("User with pseudoName="
                         + userMedListRequest.getUser() + " was not found"));
-        }
+    }
 
     protected Medication getMedication(UserMedListRequest userMedListRequest) {
         return userMedListDao
-                .fetchMedication(userMedListRequest.getMedication())
+                .fetchMedicationByBrandName(userMedListRequest.getMedication())
                 .orElseThrow(()
-                -> new NoSuchElementException("User with brandName="
+                        -> new NoSuchElementException("User with brandName="
                         + userMedListRequest.getMedication() + " was not found"));
     }
 

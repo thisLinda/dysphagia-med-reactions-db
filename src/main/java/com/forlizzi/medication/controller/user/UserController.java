@@ -55,12 +55,12 @@ public interface UserController {
             false) String date_of_discharge, String med_dx_icd, String tx_dx_icd);
 
     @Operation(
-            summary = "Returns a list of users",
-            description = "Returns a list of users",
+            summary = "Returns a list of user",
+            description = "Returns a list of user",
             responses = {
                     @ApiResponse(
                             responseCode = "200",
-                            description = "A list of users is returned.",
+                            description = "A list of user is returned.",
                             content = @Content(
                                     mediaType="application/json",
                                     schema = @Schema(implementation = User.class))),
@@ -146,13 +146,13 @@ public interface UserController {
                             responseCode = "500",
                             description = "An unplanned error occurred.",
                             content = @Content(mediaType = "application/json")),
-            },
-            parameters = {
-                    @Parameter(
-                            name = "UserPK",
-                            allowEmptyValue = false,
-                            required = false,
-                            description = "Enter the userPK to be deleted"),
+//            },
+//            parameters = {
+//                    @Parameter(
+//                            name = "UserPK",
+//                            allowEmptyValue = false,
+//                            required = false,
+//                            description = "Enter the userPK to be deleted"),
             }
     )
     @DeleteMapping

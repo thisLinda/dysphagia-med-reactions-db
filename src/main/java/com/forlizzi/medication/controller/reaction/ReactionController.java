@@ -55,11 +55,11 @@ public interface ReactionController {
                                     mediaType="application/json"))
             },
             parameters = {
-                    @Parameter(
-                            name = "severity",
-                            allowEmptyValue = false,
-                            required = false,
-                            description = "The severity as JSON"),
+//                    @Parameter(
+//                            name = "severity",
+//                            allowEmptyValue = false,
+//                            required = false,
+//                            description = "The severity as JSON"),
                     @Parameter(
                             name = "reaction",
                             allowEmptyValue = false,
@@ -71,7 +71,7 @@ public interface ReactionController {
     @ResponseStatus(code = HttpStatus.OK)
     List<Reaction> fetchReactions(
             @RequestParam(required = true)
-                    ReactionSeverity severity,
+                    ReactionSeverity reactionSeverity,
             @Length(max = Constants.REACTION_MAX_LENGTH)
             @Pattern(regexp = "[\\w\\s]*")
             @RequestParam(required = true)

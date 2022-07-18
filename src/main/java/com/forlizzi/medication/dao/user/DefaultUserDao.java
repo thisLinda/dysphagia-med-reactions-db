@@ -38,7 +38,6 @@ public class DefaultUserDao implements UserDao {
                 + ")";
         // @formatter:on
         SqlParams params = new SqlParams();
-
         params.sql = sql;
         params.source.addValue("user_pk", userPK);
         params.source.addValue("pseudo_name", pseudoName);
@@ -104,8 +103,7 @@ public class DefaultUserDao implements UserDao {
     public void deleteUser(int userPK) {
         //@formatter:off
         String sql = ""
-                + "DELETE FROM"
-                + "users "
+                + "DELETE FROM users "
                 + "WHERE user_pk = :user_pk";
         // @formatter:on
 

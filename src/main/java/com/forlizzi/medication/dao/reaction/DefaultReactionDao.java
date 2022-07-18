@@ -21,18 +21,18 @@ public class DefaultReactionDao implements ReactionDao {
     private NamedParameterJdbcTemplate jdbcTemplate;
 
     @Override
-    public List<Reaction> fetchReactions(ReactionSeverity severity, String reaction) {
-        log.debug("DAO: severity={}, reaction={}", severity, reaction);
+    public List<Reaction> fetchReactions(ReactionSeverity reactionSeverity, String reaction) {
+        log.debug("DAO: reactionSeverity={}, reaction={}", reactionSeverity, reaction);
 
         // @formatter:off
         String sql = ""
                 + "SELECT * "
                 + "FROM adverse_reactions "
-                + "WHERE severity = :severity AND reaction = :reaction";
+                + "WHERE reaction_severity = :reaction_severity AND reaction = :reaction";
         // @formatter:on
 
         Map<String, Object> params = new HashMap<>();
-        params.put("reaction_severity", severity);
+        params.put("reaction_severity", reactionSeverity.toString());
         params.put("reaction", reaction);
 
         return jdbcTemplate.query(sql, params, new RowMapper<>() {
@@ -40,7 +40,7 @@ public class DefaultReactionDao implements ReactionDao {
             public Reaction mapRow(ResultSet rs, int rowNum) throws SQLException {
             // @formatter:off
             return Reaction.builder()
-                    .severity(ReactionSeverity.valueOf("severity"))
+                    .reactionSeverity(ReactionSeverity.valueOf(rs.getString("reaction_severity")))
                     .reaction(rs.getString("reaction"))
                     .build();
             // @formatter:on
