@@ -16,10 +16,9 @@ public class DefaultUserController implements UserController {
     private UserService userService;
 
     @Override
-    public int createUser(int user_pk, String pseudo_name, int age, String date_of_eval, String date_of_discharge,
-                           String med_dx_icd, String tx_dx_icd) {
-        return userService.createUser(user_pk, pseudo_name, age, date_of_eval, date_of_discharge,
-                med_dx_icd, tx_dx_icd);
+    public int createUser(int userPK, String pseudoName, int age, String dateOfEval, String dateOfDischarge,
+                          String medDxIcd, String txDxIcd) {
+        return userService.createUser(userPK, pseudoName, age, dateOfEval, dateOfDischarge, medDxIcd, txDxIcd);
     }
 
     @Override

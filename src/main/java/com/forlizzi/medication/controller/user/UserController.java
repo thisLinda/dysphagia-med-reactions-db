@@ -51,8 +51,8 @@ public interface UserController {
     )
     @PostMapping
     @ResponseStatus(code = HttpStatus.CREATED)
-    int createUser(@Valid int user_pk, String pseudo_name, int age, String date_of_eval, @RequestParam(required =
-            false) String date_of_discharge, String med_dx_icd, String tx_dx_icd);
+    int createUser(@Valid int userPK, String pseudoName, int age, String dateOfEval, @RequestParam(required =
+            false) String dateOfDischarge, String medDxIcd, String txDxIcd);
 
     @Operation(
             summary = "Returns a list of user",

@@ -21,8 +21,9 @@ public class DefaultUserDao implements UserDao {
     private NamedParameterJdbcTemplate jdbcTemplate;
 
     @Override
-    public int createUser(int user_pk, String pseudo_name, int age, String date_of_eval, String date_of_discharge, String med_dx_icd, String tx_dx_icd) {
-        SqlParams params = generateInsertSql(user_pk, pseudo_name, age, date_of_eval, date_of_discharge, med_dx_icd, tx_dx_icd);
+    public int createUser(int userPK, String pseudoName, int age, String dateOfEval, String dateOfDischarge,
+                          String medDxIcd, String txDxIcd) {
+        SqlParams params = generateInsertSql(userPK, pseudoName, age, dateOfEval, dateOfDischarge, medDxIcd, txDxIcd);
 
         KeyHolder keyHolder = new GeneratedKeyHolder();
         return jdbcTemplate.update(params.sql, params.source, keyHolder);
@@ -50,14 +51,14 @@ public class DefaultUserDao implements UserDao {
     }
 
     @Override
-    public List<User> getUsers(int user_pk) {
+    public List<User> getUsers(int userPK) {
         // formatter:off
         String sql = ""
                 + "SELECT * "
                 + "FROM users "
                 + "WHERE user_pk = :user_pk";
         Map<String, Object> params = new HashMap<>();
-        params.put("user_pk", user_pk);
+        params.put("user_pk", userPK);
         return jdbcTemplate.query(sql, params, new RowMapper<>() {
 
         @Override
@@ -106,7 +107,6 @@ public class DefaultUserDao implements UserDao {
                 + "DELETE FROM users "
                 + "WHERE user_pk = :user_pk";
         // @formatter:on
-
         Map<String, Object> params = new HashMap<>();
         params.put("user_pk", userPK);
         jdbcTemplate.update(sql, params);

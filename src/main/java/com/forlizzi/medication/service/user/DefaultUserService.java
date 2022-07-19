@@ -16,9 +16,9 @@ public class DefaultUserService implements UserService {
 
     @Override
     @Transactional
-    public int createUser(int user_pk, String pseudo_name, int age, String date_of_eval, String date_of_discharge, String med_dx_icd, String tx_dx_icd) {
-        int user = userDao.createUser(user_pk, pseudo_name, age, date_of_eval, date_of_discharge, med_dx_icd,
-                tx_dx_icd);
+    public int createUser(int userPK, String pseudoName, int age, String dateOfEval, String dateOfDischarge,
+                          String medDxIcd, String txDxIcd) {
+        int user = userDao.createUser(userPK, pseudoName, age, dateOfEval, dateOfDischarge, medDxIcd, txDxIcd);
         return user;
     }
 
