@@ -41,6 +41,7 @@ public class DefaultUserService implements UserService {
 
     @Override
     public void deleteUser(int userPK) {
+        userDao.deleteUser(userPK);
     }
 
 }
