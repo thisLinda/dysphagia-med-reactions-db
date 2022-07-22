@@ -3,7 +3,6 @@ package com.forlizzi.medication.dao.user;
 import com.forlizzi.medication.entity.user.Medication;
 import com.forlizzi.medication.entity.user.User;
 import com.forlizzi.medication.entity.user.UserMedList;
-
 import java.util.Optional;
 
 public interface UserMedListDao {

@@ -55,11 +55,6 @@ public interface ReactionController {
                                     mediaType="application/json"))
             },
             parameters = {
-//                    @Parameter(
-//                            name = "severity",
-//                            allowEmptyValue = false,
-//                            required = false,
-//                            description = "The severity as JSON"),
                     @Parameter(
                             name = "reaction",
                             allowEmptyValue = false,

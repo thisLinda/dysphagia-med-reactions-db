@@ -146,13 +146,6 @@ public interface UserController {
                             responseCode = "500",
                             description = "An unplanned error occurred.",
                             content = @Content(mediaType = "application/json")),
-//            },
-//            parameters = {
-//                    @Parameter(
-//                            name = "UserPK",
-//                            allowEmptyValue = false,
-//                            required = false,
-//                            description = "Enter the userPK to be deleted"),
             }
     )
     @DeleteMapping

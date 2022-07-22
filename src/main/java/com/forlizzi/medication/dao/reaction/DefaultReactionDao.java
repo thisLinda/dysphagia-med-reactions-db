@@ -47,4 +47,5 @@ public class DefaultReactionDao implements ReactionDao {
             }
         });
     }
+
 }
