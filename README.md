@@ -1,9 +1,9 @@
 <div id="top"></div>
 
-## Check it Out
+## Check It Out
 Deployed on [soon!]
 
-## About the Project
+## About The Project
 Promineo Tech Back-End Development Spring Boot Final Project.
 
 The database was conceptualized as a tool for use by medical speech-language pathologists (SLP) when evaluating a new patient for dysphagia (swallow impairment). Many medications have known possible adverse reaction on swallow function and the SLP needs to be aware if the patient is prescribed them. 
