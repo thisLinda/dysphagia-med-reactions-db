@@ -3,6 +3,11 @@
 ## Check It Out
 Deployed on [soon!]
 
+![get and put](src/main/resources/get_and_put.gif)
+![post](src/main/resources/post.gif)
+![delete](src/main/resources/delete.gif)
+
+
 ## About The Project
 Promineo Tech Back-End Development Spring Boot Final Project.
 
