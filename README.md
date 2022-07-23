@@ -1,7 +1,9 @@
 <div id="top"></div>
 
 ## Check It Out
-Deployed on [soon!]
+Deployed on [soon!]!
+[crud](https://user-images.githubusercontent.com/34631602/180607825-e9076870-d592-47dc-8fbb-934e45010e83.gif)
+
 
 ## About The Project
 Promineo Tech Back-End Development Spring Boot Final Project.
